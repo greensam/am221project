@@ -12,7 +12,7 @@ David Freed and Sam Green\\
 
 \section{Problem Statement}
 
-In this project, we intend to model the predictive properties of Twitter data relating to outcomes of high visibility basketball games in the NBA or NCAA. Previous work has applied tools from statistical analysis to establish that Twitter data can be used to predict outcomes of games in sporting events\footnote{Previous work on the NFL: \url{https://www.cs.cmu.edu/~nasmith/papers/sinha+dyer+gimpel+smith.mlsa13.pdf}}. Previous work that we have discovered, however, leaves unanswered questions about how the predictive quality of Twitter data changes over time. In this project, we will investigate the shape of the ``predictive curve'' for tweets, with the goal of answering the question: ``At what point in a game do tweets become an accurate predictor of outcomes?''
+In this project, we intend to model the predictive properties of Twitter data relating to outcomes of high visibility basketball games in the NBA or NCAA. Previous work has applied tools from statistical analysis to establish that Twitter data can be used to predict outcomes of games in sporting events.\footnote{Previous work on the NFL: \url{https://www.cs.cmu.edu/~nasmith/papers/sinha+dyer+gimpel+smith.mlsa13.pdf}} Previous work that we have discovered, however, leaves unanswered questions about how the predictive quality of Twitter data changes over time. In this project, we will investigate the shape of the ``predictive curve'' for tweets, with the goal of answering the question: ``At what point in a game do tweets become an accurate predictor of outcomes?''
 
 The project has a fundamentally applied goal but nonetheless depends substantially
 on optimization theory. We intend to build a predictive model that investigates
@@ -69,9 +69,9 @@ We will primarily collect two types of data for this project: Twitter-based data
 
 Our primary aim is to collect data from Twitter regarding an actual game. We will sort our data by time, date, and hashtag. Since we are interested in overall sentiment during the game, we will limit our search to tweets between tipoff and the final buzzer, data that will come from the following dataset. 
 
-We will further filter by hashtag/account to get relevant Tweets. In a game between the Cleveland Cavaliers and Golden State Warriors, for example, we might look at all Tweets containing \#GSW, \#Cavaliers, \#Dubs, \#GSWvCLE, and any number of relevant hashtags. It is not clear how we will select appropriate hashtags?with luck, we can create a script that will automate this process effectively. 
+We will further filter by hashtag/account to get relevant Tweets. In a game between the Cleveland Cavaliers and Golden State Warriors, for example, we might look at all Tweets containing \#GSW, \#Cavaliers, \#Dubs, \#GSWvCLE, and any number of relevant hashtags. It is not clear how we will select appropriate hashtags; with luck, we can create a script that will automate this process effectively. 
 
-For each tweet, we want to grab the following information:
+We want to build a dataset with the following information for each tweet:
 \begin{enumerate}
 	\item User characteristics (tagline, number of followers, etc.)
 	\item Tweet characteristics (time, location, no. of retweets/favorites, etc.)
@@ -79,7 +79,7 @@ For each tweet, we want to grab the following information:
 \end{enumerate}
 
 \noindent
-The last item will be the most salient characteristic of the Tweet--we want to know how the user is feeling about the game. We will get this sensitivity score by developing our own natural language processor. In order to do this effectively, we hope to borrow from the literature here.
+The last item will be the most salient characteristic of each datapoint: we want to know how the user is feeling about the game. We will get this sensitivity score by applying our own natural language processor, based on established processing techniques in the previous literature. 
 
 \subsection{Box Score Data}
 
@@ -90,7 +90,7 @@ To connect this Twitter data with outcomes, we need to get a set of outcomes. We
 \end{enumerate}
 
 \noindent
-Eventually, we will try to map the time that the event occurred in the game to when it appeared in real life. This will allow us to get a sense for what information is included in Tweets and what types of plays prompt people to get excited on Twitter.
+Eventually, we will try to map the time that the event occurred in the game to when it appeared in real life. This will allow us to get a sense for what information is included in Tweets and what types of plays prompt people to respond on Twitter.
 
 \section{Next Steps}
 
