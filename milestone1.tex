@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{fullpage}
+\usepackage[urlcolor=blue]{hyperref}
 
 \begin{document}
 \begin{center}
@@ -19,9 +20,56 @@ This project will be completed by David Freed and Sam Green. We intend to work c
 
 \section{Data}
 
+We will primarily collect two types of data for this project: Twitter-based data and outcome-based data. As illustrated in the above problem statement, our goal is to create connections between the two and see how good Twitter is as an inferential model (i.e. given past game outcomes, how good is Twitter at predicting future outcomes). 
+
+\subsection{Twitter Data}
+
+Our primary aim is to collect data from Twitter regarding an actual game. We will sort our data by time, date, and hashtag. Since we are interested in overall sentiment during the game, we will limit our search to tweets between tipoff and the final buzzer, data that will come from the following dataset. 
+
+We will further filter by hashtag/account to get relevant Tweets. In a game between the Cleveland Cavaliers and Golden State Warriors, for example, we might look at all Tweets containing \#GSW, \#Cavaliers, \#Dubs, \#GSWvCLE, and any number of relevant hashtags. It is not clear how we will select appropriate hashtags?with luck, we can create a script that will automate this process effectively. 
+
+For each tweet, we want to grab the following information:
+\begin{enumerate}
+	\item User characteristics (tagline, number of followers, etc.)
+	\item Tweet characteristics (time, location, no. of retweets/favorites, etc.)
+	\item Sensitivity score
+\end{enumerate}
+
+\noindent
+The last item will be the most salient characteristic of the Tweet--we want to know how the user is feeling about the game. We will get this sensitivity score by developing our own natural language processor. In order to do this effectively, we hope to borrow from the literature here.
+
+\subsection{Box Score Data}
+
+To connect this Twitter data with outcomes, we need to get a set of outcomes. We will create a simple scraper for box scores so that we can get the outcomes for all the games that we study. We envision scraping sites like \url{http://espn.go.com/nba/playbyplay?gameId=400828584} to get the following data for every game:
+\begin{enumerate}
+	\item Time of every score change (so as to keep track of score over time)
+	\item Information about each play (who made which play)
+\end{enumerate}
+
+\noindent
+Eventually, we will try to map the time that the event occurred in the game to when it appeared in real life. This will allow us to get a sense for what information is included in Tweets and what types of plays prompt people to get excited on Twitter.
+
 \section{Deliverables}
 
 \section{Next Steps}
 
+Our next steps all have to do with acquiring data. We break it down here into steps needed to acquire Twitter data and steps needed to acquire box score data:
+
+\subsubsection*{Twitter Data Next Steps}
+\begin{enumerate}
+	\item Get Twitter API keys
+	\item Identify the best ways to get requests and the structure for streaming data from Twitter
+	\item Read the literature on sensitivity analyses on Tweets
+	\item Get trial data (ideally with location tags attached)
+\end{enumerate}
+
+\subsubsection*{Box Score Data Next Steps}
+\begin{enumerate}
+	\item Create a scrape to get all of the box score data
+	\item Write a win probability model
+\end{enumerate}
+
+\noindent
+The win probability model will likely be a replication of what people already do online and will provide a reference point for how good Twitter is at predicting games. We might initialize the model to the Vegas line or some other ex-ante predictor of performance (Pythagorean estimates are a commonly accepted way of measuring team strength). 
 
 \end{document}
