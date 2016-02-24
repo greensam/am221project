@@ -9,12 +9,64 @@ David Freed and Sam Green\\
 \today
 \end{center}
 
+\section{Problem Statement}
+
+In this project, we intend to model the predictive 
+properties of Twitter data relating to outcomes
+of high visibility basketball games in the NBA
+or NCAA. Previous work has applied tools from 
+statistical analysis to establish that
+twitter data can be used to predict outcomes
+of games in sporting events. \footnote{Previous work on the NFL: \url{https://www.cs.cmu.edu/~nasmith/papers/sinha+dyer+gimpel+smith.mlsa13.pdf}} Previous work that we have discovered,
+however, leaves unanswered questions about how the predictive quality
+of Twitter data changes over time. In this project, we will investigate
+the shape of the ``predictive curve'' for tweets, with the goal of answering
+the question: ``At what point in a game do tweets become an accurate predictor of outcomes?''
+
+The project has a fundamentally applied goal but notheless depends substantially
+on optimization theory. We intend to build a predictive model that investigates
+outcomes of games, but the main question of interest is rooted in sensitivity
+analysis. Rather than simply asking ``can we use twitter data to predict outcomes?'',
+we wish to perform sensitivity analysis that characterizes when the model 
+we produce becomes useful. 
+
+The pool of questions we can pose is also very extensible. After building 
+a baseline predictive model, we can alter the character of the input data
+(limiting to tweets from specific types of Twitter users, correlating predictive
+quality of tweets with geolocation, testing the number of tweets necessary 
+for the model to become predictive.) 
+
+\section{Deliverables}
+
+\begin{center}
+\begin{tabular}{l  c }
+Date & Deliverables \\
+Mid-March & \begin{itemize}
+			\item Twitter data collection script written (using the Twitter Streaming API)
+			\item Game data sourced, and collection script written (game data must be converted to time series)
+
+			\end{itemize}
+End of March & \begin{itemize}
+				\item Data collected (Twitter and Game)
+				\item Sentiment classification script for Tweets
+				\item Baseline expert prediction set created (for benchmarking)
+				\end{itemize}
+Mid-April & \begin{itemize}
+			Statistical Model in process or complete.\\
+			Preliminary sensitivity analysis \& results.
+			\end{itemize}
+
+End of April & \begin{itemize}
+				\item Robustness checks.
+				\item Final Analysis.
+				\item Extensions.
+				\end{itemize}
+\end{tabular} 	
+\end{center}
+
 \section{Collaboration}
 
 This project will be completed by David Freed and Sam Green. We intend to work collaboratively on all aspects of the project and will divide specific implementation tasks based on our previous experience as they arise.
-
-\section{Problem Statement}
-
 
 
 \section{Data}
