@@ -73,9 +73,10 @@ class TweetReader:
                 try:
                     obj = json.loads(self.base)
                 except Exception as e:
-                    print line
-                    print self.base
-                    raise e
+                    print "Conversion error \
+                        after {0} lines in file {1}.\
+                         Attempting to recover.".format(self.line_count,\
+                          self.infile_str)
                 self.base = '{'
                 return obj
             else:
@@ -92,7 +93,7 @@ class TweetReader:
         if self.outfile is None:
             raise Exception("Method requires outfile.")
             
-        writer = csv.DictWriter(self.outfile, fieldnames=obj.keys())
+        writer = csv.DictWriter(self.outfile, fieldnames=obj.keys(),quoting=csv.QUOTE_ALL)
         writer.writerow(obj)
         return True
     
