@@ -24,7 +24,7 @@ class TweetReader:
         self.infile = codecs.open(infile, 'r', encoding='utf-8')
         self.line_count = 0
         self.base = ""
-        
+
         if not self.outfile_str is None:
             self.outfile = open(outfile, 'w')
         else:
@@ -65,6 +65,7 @@ class TweetReader:
                 try:
                     obj = to_json(self.base)
                     self.base = ""
+                    return obj
                 except:
                     raise StopIteration()
                 
@@ -88,7 +89,7 @@ class TweetReader:
         obj = self.next()
         cleaned = clean_function(obj)
         return cleaned
-    
+        
     def write(self, obj):
         if self.outfile is None:
             raise Exception("Method requires outfile.")
