@@ -20,13 +20,42 @@ David Freed and Sam Green\\
 
 \section*{Overview of Main Progress}
 
+We begin by addressing the questions 
+described in the milestone description
+and the return to more detailed discussion
+after the overview. 
 
+As it stands, we have not revised the goal
+of our project, though we have introduced
+an intermediate model building goal. The over
+all goal of our project is still to assess
+the relative strength of using time series
+of tweets to build win probability models
+relative to the the standard logistic
+regression based predictive models that
+currently in standard use. We have selected
+a Hidden Markov based model as the end goal.
+As a intermediate goal, however, we intend
+to assess the basic predictve 
+strength of the data by using the tweets
+to predict the leader of the game at each
+time period of the game. 
 
-\section*{Data Update}
+We have collected tweets for 35 
+games, with a total of more than 500k so
+far. This is more tweets per game than
+the collected for previous studies. We
+intend to collect data on the remaining
+NCAA games next week. 
 
-Updates for all of the specific data that we collected are mostly contained in the below section, which chronicles exactly what we did to get all of the relevant data that we are going to use in building our model. At this point, barring a bit more data collection on Saturday and Monday (during the last two remaining games of the NCAA Tournament) we are mostly done with the data collection stage of the process. 
+We address our previous stated goals below
+in more detail, but broadly, we have
+accomplished the majority of data collection
+and have established a benchmark probability
+model and have a good direction in which
+to head towards our final deliverable. 
 
-\section*{Next Steps: Status Update}
+\section*{Status Update from Milestone 1}
 
 We have reproduced the next steps that we made in the initial report below, with related commentary for each as to how much progress we have made on each. In sum, we have done almost all of the next steps that we proposed we would do earlier. 
 
@@ -45,7 +74,46 @@ We have reproduced the next steps that we made in the initial report below, with
 
 \subsubsection*{Get trial data}
 
-\textit{Mostly done.}
+\textit{Mostly done. We've successfully collected tweets
+from 35 games from the NCAA March Madness
+tournament, with a totally of about 500k tweets collected. The smallest pool for
+one game that we've collected is 5k,
+and the smallest pool we've collected
+is 50k. }
+
+The data that we have collected has been
+cleaned to include simply the tweet text
+and a timestamp, though other axes of
+information are available. We have so
+far classified all of the tweets that
+we have collected by game and created
+infrastructure to build bucketed
+time series of the tweets.
+
+Initial analysis indicates that the data
+we have collected should be adequate 
+for the analysis we wish to perform 
+(or at least isn't obviously inadequate).
+Tweets are at reasonable volumes
+through the collection period, with
+notable spikes in volume likely
+corresponding to game events. 
+Pairing tweet timestamps to game timestamps
+remains as a major next step (see next subsection), and see the linecharts below
+for distributions of tweets for each game
+we have collected. There's a broad
+variety in the number of tweets collected,
+since many games, especially in the early
+rounds of tournament, took place at
+the same time and between lower
+visibility teams. Even the smallest
+volumes have on the order of 100 tweets per minute.
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[scale = 0.7]{tweetvolues.pdf} 
+	\caption{Example data taken from the Miami-Wichita State second round NCAA Tournament game}
+\end{figure}
 
 \subsection*{Box Score Data Next Steps}
 \subsubsection*{Create a scraper to get all of the box score data}
@@ -66,11 +134,11 @@ While most of this data is not used until the following section, we did create f
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[scale = 0.4] {NI_TAMU.png} 
+	\includegraphics[scale = 0.1] {NI_TAMU.png} 
 	\caption{Trend graph showing scores over time for the Texas A\&M-Northern Iowa second round NCAA Tournament game}
 \end{figure}
 
-\subsubsection*{Write a win probability model}
+\subsubsection*{Write a benchmark win probability model}
 
 The next thing that we had to do was write a win probability model for the data. We did this by following the conventional research (see \href{http://fivethirtyeight.com/features/how-fivethirtyeight-is-forecasting-the-2016-ncaa-tournament/}{here} and \href{http://wagesofwins.com/2009/03/05/modeling-win-probability-for-a-college-basketball-game-a-guest-post-from-brian-burke/}{here}). The gist of the standard methodology is to collect a bunch of play-by-play data (of the type we have above) and then do a logistic regression in each time period based on the point spread and the difference in the game at that point in time.
 
@@ -104,7 +172,8 @@ Our project proposal demanded that we have three major items in order to run the
 \begin{enumerate}
 	\item \textbf{Game-by-game Twitter data}. As described above, we need this to be able to gauge fan sentiment at every point during the game so that we can get their impression on how the game is going
 	\item \textbf{Game progress data}. This comprises both the score at each point in time\footnote{Of more importance to us is the difference in scores---whether a team is up 100-90 or 10-0 is immaterial; the ex ante predictors of team strength we used are based in the predicted final score difference.} and the probability of the favorite winning at each point in time
-	\item \textbf{Twitter prediction model}. For our final results, we will essentially be comparing the standard win probability models above to the Twitter prediction model that we build. 
+	\item \textbf{Twitter prediction model}. For our final results, we will essentially be comparing the standard win probability models above to the Twitter prediction model that we build. Sentiment analysis also remains to be accomplished, but requires a repurposing of
+	existing infrastructure. 
 \end{enumerate}
 
 Consequently, we can say that we have accomplished most of our goals. While there are minor things to do on the first two points\footnote{One thing that jumps out as an immediate next step on the data is matching analog times (i.e. 2:00 EST) from the Tweets to the time left in the game. This will allow us to directly match the predictions by Twitter to predictions made by the win probability model.} we are mostly focused now on creating the Twitter model. 
