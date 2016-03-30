@@ -72,7 +72,7 @@ While most of this data is not used until the following section, we did create f
 
 \subsubsection*{Write a win probability model}
 
-The next thing that we had to do was write a win probability model for the data. We did this by following the conventional research (see here, here, and here). The gist of the standard methodology is to collect a bunch of play-by-play data (of the type we have above) and then do a logistic regression in each time period based on the point spread and the difference in the game at that point in time.
+The next thing that we had to do was write a win probability model for the data. We did this by following the conventional research (see \href{http://fivethirtyeight.com/features/how-fivethirtyeight-is-forecasting-the-2016-ncaa-tournament/}{here} and \href{http://wagesofwins.com/2009/03/05/modeling-win-probability-for-a-college-basketball-game-a-guest-post-from-brian-burke/}{here}). The gist of the standard methodology is to collect a bunch of play-by-play data (of the type we have above) and then do a logistic regression in each time period based on the point spread and the difference in the game at that point in time.
 
 We were able to implement this after some trouble, but did not fit the model to a lot of data. As of the writing of this document, we had just used a sample of 40 games to fit the data, which is much less than is typically used to fit the model (some versions that we have seen have used up to 20 times as many data). While the logistic regression model that we created predicted the final victor with about an 80 percent accuracy in each period (see table below), the coefficients varied so significantly across time periods that our win probability graphs were not nearly as smooth as we would like. 
 
