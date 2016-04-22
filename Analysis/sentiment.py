@@ -18,6 +18,15 @@ import csv, random
 import nltk
 import tweet_features
 
+"""
+This method trains a classifier using
+the data in training.csv
+
+To classifer a tweet, call
+the object that results from this call
+with obj.classify(text) 
+where text is the text of the tweet. 
+"""
 def sentiment_classifier():
 	trainingfp = open('training.csv', 'rb')
 	reader = csv.reader( trainingfp, delimiter=',', quotechar='"', escapechar='\\' )
