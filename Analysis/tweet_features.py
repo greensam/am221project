@@ -34,6 +34,7 @@ testFeatures = \
      ('hasFuck',       ('fuck',)), \
      ('hasGood',       ('good','great')), \
      ('hasHappy',      (' happy',' happi')), \
+     ('hasLetsGo',    ('let\'s go',)), \
      ('hasHate',       ('hate',)), \
      ('hasHeart',      ('heart', '<3')), \
      ('hasIssue',      (' issue',)), \

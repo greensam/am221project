@@ -31,10 +31,25 @@ def sentiment_classifier():
 	trainingfp = open('training.csv', 'rb')
 	reader = csv.reader( trainingfp, delimiter=',', quotechar='"', escapechar='\\' )
 	trainingtweets = []
+	next(reader)
 	for row in reader:
-		trainingtweets.append([row[1], row[4]])
+		trainingtweets.append([row[4],row[1]])
 	random.shuffle(trainingtweets)
 
 	fvecs = [(tweet_features.make_tweet_dict(t),s) for (t,s) in trainingtweets]
-	classifier = nltk.NaiveBayesClassifier.train(fvecs);
+	classifier = nltk.NaiveBayesClassifier.train(fvecs)
 	return classifier
+
+class Classifier():
+	
+	def __init__(self):
+		self.classifier = sentiment_classifier()
+
+	def vector(self, tweet):
+		return tweet_features.make_tweet_dict(tweet)
+
+	def classify(self,tweet):
+		fvec = tweet_features.make_tweet_dict(tweet)
+		# return fvec
+		return self.classifier.classify(fvec)
+
