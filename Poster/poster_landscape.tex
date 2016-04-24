@@ -266,8 +266,10 @@
  headerheight=0.12\textheight}
  % Eye Catcher
  {
-      \includegraphics[width=0.12\linewidth]{WvuSFA_clean_timeseries.pdf}
-      \includegraphics[width=0.12\linewidth]{OklaCSU_clean_timeseries.pdf}
+      % source: https://commons.wikimedia.org/wiki/File:Kansas_Jayhawks_Open_Practice_at_the_2016_March_Madness_Opening_Rounds_(25817826036).jpg
+      \includegraphics[width=0.12\linewidth]{stadium1}
+      % https://upload.wikimedia.org/wikipedia/en/9/9f/Twitter_bird_logo_2012.svg
+      \includegraphics[width=0.10\linewidth]{twitter}
       \includegraphics[width=0.12\linewidth]{OregonHC_clean_timeseries.pdf}
  }
  % Title
@@ -279,7 +281,6 @@
  {
   \begin{tabular}{r}
     \includegraphics[height=0.12\textheight]{logo}\\
-    \raisebox{0em}[0em][0em]{\includegraphics[height=0.03\textheight]{msrlogo}}
   \end{tabular}
  }
 
@@ -447,9 +448,9 @@
    The experiments were performed with leave one identity out on a mixture of two databases (XM2VTS and IMM).
    \end{multicols}
    }
-%
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   \headerbox{Methods Compared}{name=methods,column=0,below=algorithm}{
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   \headerbox{Methods Compared}{name=methods,column=0}{
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   \begin{tabular}{rllllll}
 %     Method                              & Hessian               &                                        & Gradient        &                                  & Speed      & Capture Range\\
@@ -484,15 +485,15 @@
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    \headerbox{Training + Testing Data}{name=data,column=0,above=references,below=collection}{
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   \includegraphics[width=0.2\linewidth]{018_4_2_masked}%
-   \includegraphics[width=0.2\linewidth]{328_2_1_masked}%
-   \includegraphics[width=0.2\linewidth]{319_2_1_masked}%
-   \includegraphics[width=0.2\linewidth]{027_4_2_masked}%
-   \includegraphics[width=0.2\linewidth]{020_1_1_masked}
-   \includegraphics[width=0.2\linewidth]{12_2f_masked}%
-   \includegraphics[width=0.2\linewidth]{21_3m_masked}%
-   \includegraphics[width=0.2\linewidth]{09_6m_masked}%
-   \includegraphics[width=0.2\linewidth]{33_4m_masked}%
+   % \includegraphics[width=0.2\linewidth]{018_4_2_masked}%
+   % \includegraphics[width=0.2\linewidth]{328_2_1_masked}%
+   % \includegraphics[width=0.2\linewidth]{319_2_1_masked}%
+   % \includegraphics[width=0.2\linewidth]{027_4_2_masked}%
+   % \includegraphics[width=0.2\linewidth]{020_1_1_masked}
+   % \includegraphics[width=0.2\linewidth]{12_2f_masked}%
+   % \includegraphics[width=0.2\linewidth]{21_3m_masked}%
+   % \includegraphics[width=0.2\linewidth]{09_6m_masked}%
+   % \includegraphics[width=0.2\linewidth]{33_4m_masked}%
    %\includegraphics[width=0.2\linewidth]{22_3f_masked}
    $\dots$\\
    The model was trained from 456 images from the IMM and XM2VTS datasets using
@@ -508,45 +509,45 @@
  \begin{tabular}{c@{\hspace{0.05em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c@{\hspace{1em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c@{\hspace{0.1em}}c}
    \multicolumn{5}{c}{\smaller \ICIA{} with $\VLins$} &
    \multicolumn{5}{c}{\smaller \ICIA{} with $\VLins$ + Regularisation}\\[-0.2em]
-   \includegraphics[width=0.095\linewidth]{track_frame_00010_01}&
-   \includegraphics[width=0.095\linewidth]{track_frame_00050_01}&
-   \includegraphics[width=0.095\linewidth]{track_frame_00450_01}&
-   \includegraphics[width=0.095\linewidth]{track_frame_02000_01}&
-   \includegraphics[width=0.095\linewidth]{track_frame_04999_01}&
-   %
-   \includegraphics[width=0.095\linewidth]{track_frame_00010_02}&
-   \includegraphics[width=0.095\linewidth]{track_frame_00050_02}&
-   \includegraphics[width=0.095\linewidth]{track_frame_00450_02}&
-   \includegraphics[width=0.095\linewidth]{track_frame_02000_02}&
-   \includegraphics[width=0.095\linewidth]{track_frame_04999_02}\\[-0.1em]
-   %
-   \multicolumn{5}{c}{\smaller \LinCoDe{}} &
-   \multicolumn{5}{c}{\smaller \LinCoDe{} + Regularisation}\\[-0.2em]
-   \includegraphics[width=0.095\linewidth]{track_frame_00010_03}&
-   \includegraphics[width=0.095\linewidth]{track_frame_00050_03}&
-   \includegraphics[width=0.095\linewidth]{track_frame_00450_03}&
-   \includegraphics[width=0.095\linewidth]{track_frame_02000_03}&
-   \includegraphics[width=0.095\linewidth]{track_frame_04999_03}&
-   %
-   \includegraphics[width=0.095\linewidth]{track_frame_00010_04}&
-   \includegraphics[width=0.095\linewidth]{track_frame_00050_04}&
-   \includegraphics[width=0.095\linewidth]{track_frame_00450_04}&
-   \includegraphics[width=0.095\linewidth]{track_frame_02000_04}&
-   \includegraphics[width=0.095\linewidth]{track_frame_04999_04}\\[-0.1em]
-   %
-   \multicolumn{5}{c}{\smaller \CoDe{}} &
-   \multicolumn{5}{c}{\smaller \CoDe{} + Regularisation}\\[-0.2em]
-   \includegraphics[width=0.095\linewidth]{track_frame_00010_05}&
-   \includegraphics[width=0.095\linewidth]{track_frame_00050_05}&
-   \includegraphics[width=0.095\linewidth]{track_frame_00450_05}&
-   \includegraphics[width=0.095\linewidth]{track_frame_02000_05}&
-   \includegraphics[width=0.095\linewidth]{track_frame_04999_05}&
-   %
-   \includegraphics[width=0.095\linewidth]{track_frame_00010_06}&
-   \includegraphics[width=0.095\linewidth]{track_frame_00050_06}&
-   \includegraphics[width=0.095\linewidth]{track_frame_00450_06}&
-   \includegraphics[width=0.095\linewidth]{track_frame_02000_06}&
-   \includegraphics[width=0.095\linewidth]{track_frame_04999_06}\\[-0.5em]
+   % \includegraphics[width=0.095\linewidth]{track_frame_00010_01}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_00050_01}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_00450_01}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_02000_01}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_04999_01}&
+   % %
+   % \includegraphics[width=0.095\linewidth]{track_frame_00010_02}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_00050_02}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_00450_02}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_02000_02}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_04999_02}\\[-0.1em]
+   % %
+   % \multicolumn{5}{c}{\smaller \LinCoDe{}} &
+   % \multicolumn{5}{c}{\smaller \LinCoDe{} + Regularisation}\\[-0.2em]
+   % \includegraphics[width=0.095\linewidth]{track_frame_00010_03}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_00050_03}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_00450_03}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_02000_03}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_04999_03}&
+   % %
+   % \includegraphics[width=0.095\linewidth]{track_frame_00010_04}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_00050_04}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_00450_04}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_02000_04}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_04999_04}\\[-0.1em]
+   % %
+   % \multicolumn{5}{c}{\smaller \CoDe{}} &
+   % \multicolumn{5}{c}{\smaller \CoDe{} + Regularisation}\\[-0.2em]
+   % \includegraphics[width=0.095\linewidth]{track_frame_00010_05}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_00050_05}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_00450_05}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_02000_05}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_04999_05}&
+   % %
+   % \includegraphics[width=0.095\linewidth]{track_frame_00010_06}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_00050_06}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_00450_06}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_02000_06}&
+   % \includegraphics[width=0.095\linewidth]{track_frame_04999_06}\\[-0.5em]
    \smaller Frame 10 & \smaller Frame 50 & \smaller Frame 450 & \smaller Frame 2000 & \smaller Frame 5000 &
    \smaller Frame 10 & \smaller Frame 50 & \smaller Frame 450 & \smaller Frame 2000 & \smaller Frame 5000
    \end{tabular}
@@ -569,30 +570,30 @@
    different subjects.
    \end{multicols}
    }
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   \headerbox{Low Res Tracking}{name=lowrestracking,column=1,span=1,below=relevance,above=bottom}{
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{tabular}{@{}c@{}c@{}c@{}c@{}c@{}}
-  \multicolumn{5}{c}{\smaller \ICIA{} with $\VLins$}\\[-0.2em]
-  \includegraphics[width=0.2\linewidth]{bush_00010_02}&
-  \includegraphics[width=0.2\linewidth]{bush_00100_02}&
-  \includegraphics[width=0.2\linewidth]{bush_00200_02}&
-  \includegraphics[width=0.2\linewidth]{bush_00300_02}&
-  \includegraphics[width=0.2\linewidth]{bush_00400_02}\\[-0.1em]
-  \multicolumn{5}{c}{\smaller \LinCoDe{}}\\[-0.2em]
-  \includegraphics[width=0.2\linewidth]{bush_00010_05}&
-  \includegraphics[width=0.2\linewidth]{bush_00100_05}&
-  \includegraphics[width=0.2\linewidth]{bush_00200_05}&
-  \includegraphics[width=0.2\linewidth]{bush_00300_05}&
-  \includegraphics[width=0.2\linewidth]{bush_00400_05}\\[-0.1em]
-  \multicolumn{5}{c}{\smaller \CoDe{}}\\[-0.2em]
-  \includegraphics[width=0.2\linewidth]{bush_00010_08}&
-  \includegraphics[width=0.2\linewidth]{bush_00100_08}&
-  \includegraphics[width=0.2\linewidth]{bush_00200_08}&
-  \includegraphics[width=0.2\linewidth]{bush_00300_08}&
-  \includegraphics[width=0.2\linewidth]{bush_00400_08}\\[-0.5em]
-  \smaller Frame 10 & \smaller Frame 100 & \smaller Frame 200 & \smaller Frame 300 & \smaller Frame 400 
-  \end{tabular}
+%  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \headerbox{Low Res Tracking}{name=lowrestracking,column=1,span=1,above=bottom}{
+%  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{tabular}{@{}c@{}c@{}c@{}c@{}c@{}}
+%   \multicolumn{5}{c}{\smaller \ICIA{} with $\VLins$}\\[-0.2em]
+%   \includegraphics[width=0.2\linewidth]{bush_00010_02}&
+%   \includegraphics[width=0.2\linewidth]{bush_00100_02}&
+%   \includegraphics[width=0.2\linewidth]{bush_00200_02}&
+%   \includegraphics[width=0.2\linewidth]{bush_00300_02}&
+%   \includegraphics[width=0.2\linewidth]{bush_00400_02}\\[-0.1em]
+%   \multicolumn{5}{c}{\smaller \LinCoDe{}}\\[-0.2em]
+%   \includegraphics[width=0.2\linewidth]{bush_00010_05}&
+%   \includegraphics[width=0.2\linewidth]{bush_00100_05}&
+%   \includegraphics[width=0.2\linewidth]{bush_00200_05}&
+%   \includegraphics[width=0.2\linewidth]{bush_00300_05}&
+%   \includegraphics[width=0.2\linewidth]{bush_00400_05}\\[-0.1em]
+%   \multicolumn{5}{c}{\smaller \CoDe{}}\\[-0.2em]
+%   \includegraphics[width=0.2\linewidth]{bush_00010_08}&
+%   \includegraphics[width=0.2\linewidth]{bush_00100_08}&
+%   \includegraphics[width=0.2\linewidth]{bush_00200_08}&
+%   \includegraphics[width=0.2\linewidth]{bush_00300_08}&
+%   \includegraphics[width=0.2\linewidth]{bush_00400_08}\\[-0.5em]
+%   \smaller Frame 10 & \smaller Frame 100 & \smaller Frame 200 & \smaller Frame 300 & \smaller Frame 400 
+%   \end{tabular}
 
   \vspace{1.25em}
   \textbf{Tracking a low resolution video with large head motions
@@ -604,11 +605,13 @@
    }
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \headerbox{Sentiment Analysis}{name=algorithm,column=1,above=relevance,below=abstract}{
+  \headerbox{Sentiment Analysis}{name=algorithm,column=1,below=abstract}{
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     As input to the model, we built a bag-of-words sentiment classifier using
-    a labeled corpus of 4000 tweets. The classifer then use a Naive Bayes
-    model to perform classfication after training. 
+    a labeled corpus of 4000 tweets. The classifer then uses a Naive-Bayes
+    model to perform classfication after it has been trained using the labeled
+    corpus. This training presents a problem to the analysis, since the classifier
+    is trained on a set of tweets related to a different topic. 
 
     In order to use productively used the data to update the win probability
     model, we also had to associate the sentiment of the tweet with
