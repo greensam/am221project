@@ -16,7 +16,24 @@ training set called 'training.csv'
 '''
 import csv, random
 import nltk
+from nltk.corpus import stopwords
 import tweet_features
+import pandas as pd
+from bs4 import BeautifulSoup     
+import re        
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.ensemble import RandomForestClassifier
+
+stops = set(stopwords.words("english"))
+
+def tweet_to_words(tweet):
+	twbs = BeautifulSoup(tweet)
+	letters_only = re.sub("[^a-zA-Z]",           # The pattern to search for
+                      " ",                   # The pattern to replace it with
+                      twbs.get_text() )
+	words = letters_only.lower().split()
+	meaningful = [w for w in words if not w in stops]
+	return " ".join(meaningful)
 
 """
 This method trains a classifier using
@@ -28,28 +45,53 @@ with obj.classify(text)
 where text is the text of the tweet. 
 """
 def sentiment_classifier():
-	trainingfp = open('training.csv', 'rb')
-	reader = csv.reader( trainingfp, delimiter=',', quotechar='"', escapechar='\\' )
-	trainingtweets = []
-	next(reader)
-	for row in reader:
-		trainingtweets.append([row[4],row[1]])
-	random.shuffle(trainingtweets)
+	# trainingfp = open('training.csv', 'rb')
+	train = pd.read_csv( 'training.csv', delimiter=',', quotechar='"', escapechar='\\',header=0 )
+	num_tweets = train['TweetText'].size
+	
+	cleantweets = []
+	for i in xrange(0, num_tweets):
+		if( (i+1)%1000 == 0 ):
+			print "Tweet %d of %d\n" % ( i+1, num_tweets )          
+		cleantweets.append(tweet_to_words(train['TweetText'][i]))
 
-	fvecs = [(tweet_features.make_tweet_dict(t),s) for (t,s) in trainingtweets]
-	classifier = nltk.NaiveBayesClassifier.train(fvecs)
-	return classifier
+	vectorizer = CountVectorizer(analyzer = "word",   \
+                             tokenizer = None,    \
+                             preprocessor = None, \
+                             stop_words = None,   \
+                             max_features = 5000) 
+
+	train_data_features = vectorizer.fit_transform(cleantweets)
+
+	forest = RandomForestClassifier(n_estimators = 100)
+	forest = forest.fit(train_data_features, train['Sentiment'])
+
+	return (forest,vectorizer)
+	# trainingtweets = []
+	# next(reader)
+	# for row in reader:
+	# 	trainingtweets.append([row[4],row[1]])
+	# self.trainingtweets = trainingtweets
+	# random.shuffle(self.trainingtweets)
+
+	# fvecs = [(tweet_features.make_tweet_dict(t),s) for (t,s) in trainingtweets]
+	# classifier = nltk.NaiveBayesClassifier.train(fvecs)
+	# return classifier
 
 class Classifier():
 	
 	def __init__(self):
-		self.classifier = sentiment_classifier()
-
-	def vector(self, tweet):
-		return tweet_features.make_tweet_dict(tweet)
+		trained =  sentiment_classifier()
+		self.forest = trained[0]
+		self.vectorizer = trained[1]
 
 	def classify(self,tweet):
-		fvec = tweet_features.make_tweet_dict(tweet)
+		clean = tweet_to_words(tweet)
+		test_features = self.vectorizer.transform([clean])
+		test_features = test_features.toarray()
+
+		result = self.forest.predict(test_features)
+
 		# return fvec
-		return self.classifier.classify(fvec)
+		return result
 
