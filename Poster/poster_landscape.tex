@@ -10,6 +10,8 @@
 \usepackage{relsize}
 \usepackage{multirow}
 \usepackage{booktabs}
+\usepackage{epstopdf}
+
 
 \usepackage{graphicx}
 \usepackage{multicol}
@@ -270,17 +272,17 @@
       \includegraphics[width=0.12\linewidth]{stadium1}
       % https://upload.wikimedia.org/wikipedia/en/9/9f/Twitter_bird_logo_2012.svg
       \includegraphics[width=0.10\linewidth]{twitter}
-      \includegraphics[width=0.12\linewidth]{OregonHC_clean_timeseries.pdf}
+      \includegraphics[width=0.09\linewidth]{basketball}
  }
  % Title
  {\sc\Huge Tweets and NCAA March Madness}
  % Authors
  {David Freed and Samuel Green\\[1em]
- {\texttt{davidfreed@college.harvard.edu, samuelgreen@college.harvard.edu}}}
+ {\texttt{\{davidfreed,samuelgreen\}@college.harvard.edu}}}
  % University logo
  {
   \begin{tabular}{r}
-    \includegraphics[height=0.12\textheight]{logo}\\
+    \includegraphics[height=0.10\textheight]{images/SEASLogo_CMYK.eps}\\
   \end{tabular}
  }
 
@@ -483,7 +485,7 @@
    }
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   \headerbox{Benchmarking and Old Model}{name=data,column=0,above=references,below=collection}{
+   \headerbox{Volumes Track Game Events}{name=data,column=0,above=references,below=collection}{
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    % \includegraphics[width=0.2\linewidth]{018_4_2_masked}%
    % \includegraphics[width=0.2\linewidth]{328_2_1_masked}%
@@ -495,10 +497,10 @@
    % \includegraphics[width=0.2\linewidth]{09_6m_masked}%
    % \includegraphics[width=0.2\linewidth]{33_4m_masked}%
    %\includegraphics[width=0.2\linewidth]{22_3f_masked}
-   $\dots$\\
-   The model was trained from 456 images from the IMM and XM2VTS datasets using
-   120 landmarks. Get the landmarks, model, and source code at:\\
-   \mbox{\url{www.cs.unibas.ch/personen/amberg_brian/aam/}}
+   \includegraphics[width=\linewidth]{OregonHC_clean_timeseries.pdf}
+   \begin{center}
+    Tweets per Minute, Oregon vs. Holy Cross
+    \end{center}
    }
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -570,39 +572,6 @@
    different subjects.
    \end{multicols}
    }
-%  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   \headerbox{Low Res Tracking}{name=lowrestracking,column=1,span=1,above=bottom}{
-%  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{tabular}{@{}c@{}c@{}c@{}c@{}c@{}}
-%   \multicolumn{5}{c}{\smaller \ICIA{} with $\VLins$}\\[-0.2em]
-%   \includegraphics[width=0.2\linewidth]{bush_00010_02}&
-%   \includegraphics[width=0.2\linewidth]{bush_00100_02}&
-%   \includegraphics[width=0.2\linewidth]{bush_00200_02}&
-%   \includegraphics[width=0.2\linewidth]{bush_00300_02}&
-%   \includegraphics[width=0.2\linewidth]{bush_00400_02}\\[-0.1em]
-%   \multicolumn{5}{c}{\smaller \LinCoDe{}}\\[-0.2em]
-%   \includegraphics[width=0.2\linewidth]{bush_00010_05}&
-%   \includegraphics[width=0.2\linewidth]{bush_00100_05}&
-%   \includegraphics[width=0.2\linewidth]{bush_00200_05}&
-%   \includegraphics[width=0.2\linewidth]{bush_00300_05}&
-%   \includegraphics[width=0.2\linewidth]{bush_00400_05}\\[-0.1em]
-%   \multicolumn{5}{c}{\smaller \CoDe{}}\\[-0.2em]
-%   \includegraphics[width=0.2\linewidth]{bush_00010_08}&
-%   \includegraphics[width=0.2\linewidth]{bush_00100_08}&
-%   \includegraphics[width=0.2\linewidth]{bush_00200_08}&
-%   \includegraphics[width=0.2\linewidth]{bush_00300_08}&
-%   \includegraphics[width=0.2\linewidth]{bush_00400_08}\\[-0.5em]
-%   \smaller Frame 10 & \smaller Frame 100 & \smaller Frame 200 & \smaller Frame 300 & \smaller Frame 400 
-%   \end{tabular}
-
-  \vspace{1.25em}
-  \textbf{Tracking a low resolution video with large head motions
-  succeeds with \CoDe{}, where \ICIA{} fails.}\\ All methods used the orthonormal
-  incremental warp, and relatively strong regularisation.  \ICIA{} starts to
-  drift in the early frames, while~\CoDe{} tracks the full sequence. The
-  approximate gradient method \LinCoDe{} also suceeds, but looses
-  track of the details for about 100 frames.
-   }
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \headerbox{Sentiment Analysis}{name=algorithm,column=1,below=abstract}{
@@ -617,17 +586,40 @@
     
    }
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \headerbox{Relevance Analysis}{name=relevance,column=1,above=lowrestracking,below=algorithm}{
+  \headerbox{Relevance Analysis}{name=relevance,column=1,above=bottom,below=algorithm}{
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    As input to the model, we built a bag-of-words sentiment classifier using
-    a labeled corpus of 4000 tweets. The classifer then use a Naive Bayes
-    model to perform classfication after training. 
+    Sentiment in this setting is much less meaningful without relating the sentiment
+    contained in a tweet to one of the two teams. We therefore perform some
+    heuristic classification of the relevance of a tweet to each team.
 
-    In order to use productively used the data to update the win probability
-    model, we also had to associate the sentiment of the tweet with
-    one or both teams. 
+    We based on the classification off of the hashtags that were originally used
+    to collect the tweets and off of rosters. To treat rosters uniformly,
+    we included that listed last names for each of the 7 top players by playing time
+    for each team, as well as the last name of the head coach, with all data from ESPN.
+
+    Tweets that were classified for both teams required tie-breaking.
+
+    This led to the following classification procedure:
+    \begin{enumerate}
+    \item Check for presence of tags and roster names.
+    \item If only relevent terms for 1 team, assign that team.
+    \item If both, choose team whose term appears first.
+    \end{enumerate}
+    We also automatically classify tweets with more than 6 hashtags as irrelevant. 
    }
 
 \end{poster}%
 %
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
