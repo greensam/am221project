@@ -67,16 +67,6 @@ def sentiment_classifier():
 	forest = forest.fit(train_data_features, train['Sentiment'])
 
 	return (forest,vectorizer)
-	# trainingtweets = []
-	# next(reader)
-	# for row in reader:
-	# 	trainingtweets.append([row[4],row[1]])
-	# self.trainingtweets = trainingtweets
-	# random.shuffle(self.trainingtweets)
-
-	# fvecs = [(tweet_features.make_tweet_dict(t),s) for (t,s) in trainingtweets]
-	# classifier = nltk.NaiveBayesClassifier.train(fvecs)
-	# return classifier
 
 class Classifier():
 	
