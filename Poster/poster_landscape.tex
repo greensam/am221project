@@ -353,15 +353,9 @@
    is clearly imperfect, we can derive information about game proceedings
    using no prior information except the volumes of tweets recorded in a game. 
 
-   % The best speed--performance tradeoffs come from the two new algorithms
-   % \CoDe{} and \LinCoDe{}. Note that \ICIA{} is practically useless on
-   % this difficult multi-person dataset with a success rate near zero (left). It
-   % can be improved (right) by using the orthonormal incremental warp and
-   % regularisation. The \CoDe{} algorithm with regularisation (right) is as
-   % accurate as the slow, approximation-free, compositional Gauss-Newton \CoNe{}
-   % method but is seven times more efficient.
-
-   The experiments were performed with leave one identity out on a mixture of two databases (XM2VTS and IMM).
+   This initial finding leaves room for significant improvement
+   after incorporating sentiment scores and a more intelligent
+   predictive model. 
    \end{multicols}
    }
 
@@ -377,8 +371,8 @@
 
        \bibitem{amberg07:nicp}
        S.~Sinha, C.~Dyer, K.~Gimpel, N.~Smith.
-       \newblock On Compositional Image Alignment with an Application to Activce Appearance Models
-       \newblock In {\em CVPR'09}, 2009.
+       \newblock Predicting the NFL Using Twitter,
+       \newblock Presented at ECML/PKDD 2013. 
 
        \end{thebibliography}
    }
@@ -389,7 +383,7 @@
    \begin{center}
     Tweets per Minute and Game Events per Minute, Virginia vs Syracuse
     \end{center}
-    A preliminary linear regression demonstrated a statistically significant
+    {\bf Event volumes track tweet volumes.} A preliminary linear regression demonstrated a statistically significant
     relationship between volumes of tweets in a given minute and the 
     number of in-game events that took place during that minute in the
     game. This result provides heuristic confirmation that tweets should
