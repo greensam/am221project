@@ -341,7 +341,7 @@
    \headerbox{Game Scores and Tweet Volumes}{name=speed,column=2,row=0,span=2}{
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \begin{center}
-    \includegraphics{images/northcarolinanotredamemarginzscoreplot.pdf}
+    \includegraphics{images/syracusevirginiamarginzscoreplot.pdf}
     \end{center}
 
    \begin{multicols}{2}
@@ -395,31 +395,46 @@
   \headerbox{Sentiment Analysis}{name=algorithm,column=1,below=data}{
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     Sentiment classification for tweets forms a central pivot point for this 
-    project. To perform classification, we trained a simple bag-of-words
-    random forest classifier against a labeled training corpus of 4000 tweets.
-    While the classifier ended up treating many tweets as neutral or irrelevant
-    because of heterogeneity between the training set and the tweets requiring
-    classification, the simple classifier we trained provided adequate classification
-    power to test the potential usefulness of the Twitter data. 
-    
+    project. To perform classification, we train a bag-of-words
+    mdoel with a labeled training corpus of 4000 tweets and a 
+    linear-kernel Support Vector Machine. The classifier successfully identifies
+    conventionally positive tweets but does not always capture 
+    tweets that are idiomatically positive towards sports teams.     
    }
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-   \headerbox{Tweet Volume Time Series}{name=tracking,column=2,span=2,below=speed,above=bottom}{
+   \headerbox{Sentiment Game Plot}{name=tracking,column=2,span=1,below=speed,above=bottom}{
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- \begin{center}
- \begin{tabular}{c@{\hspace{-0.1em}}c@{\hspace{-0.1em}}c}
- \includegraphics[width=0.33\linewidth]{images/MichStateMiddTenn_clean_timeseries.pdf} &
-  \includegraphics[width=0.33\linewidth]{images/OklaCSU_clean_timeseries.pdf} &
- \includegraphics[width=0.33\linewidth]{images/OregonHC_clean_timeseries.pdf}
- % \includegraphics[width=0.15\linewidth]{images/TexasGB_clean_timeseries.pdf} & 
- % \includegraphics[width=0.15\linewidth]{images/VillanovaAsheville_clean_timeseries.pdf} & 
- % \includegraphics[width=0.15\linewidth]{images/WvuSFA_clean_timeseries.pdf}\\
- \end{tabular}
- \end{center}
+    \begin{center}
+    \includegraphics[width=0.98\linewidth]{images/syracusevasent.pdf}
+    \end{center}
+  }
 
-   }
+  \headerbox{Further Work}{name=tracking,column=3,span=1,below=speed,above=bottom}{
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    The major piece of remaining work for the scope of this project is to investigate the
+    relationship between sentiment classifications and changes in-game. We plan also 
+    to benchmark the sentiment probability model against the industry-standard real-time probability model,
+    which is based on historical data. We hope to apply a Hidden Markov Model to model the sequence
+    of lead changes that take place during a game, as well as to model the likeliest overall winner
+    at each time period during the game. 
+  }
+
+
+
+ % \begin{center}
+ % \begin{tabular}{c@{\hspace{-0.1em}}c@{\hspace{-0.1em}}c}
+ % % \includegraphics[width=0.33\linewidth]{images/MichStateMiddTenn_clean_timeseries.pdf} &
+ % %  \includegraphics[width=0.33\linewidth]{images/OklaCSU_clean_timeseries.pdf} &
+ % % \includegraphics[width=0.33\linewidth]{images/OregonHC_clean_timeseries.pdf}
+ % % \includegraphics[width=0.15\linewidth]{images/TexasGB_clean_timeseries.pdf} & 
+ % % \includegraphics[width=0.15\linewidth]{images/VillanovaAsheville_clean_timeseries.pdf} & 
+ % % \includegraphics[width=0.15\linewidth]{images/WvuSFA_clean_timeseries.pdf}\\
+ % \end{tabular}
+ % \end{center}
+
+   
 
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \headerbox{Relevance Analysis}{name=relevance,column=0,above=references,below=collection}{
