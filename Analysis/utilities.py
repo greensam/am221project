@@ -23,9 +23,17 @@ from relevance import addrelevancedf
 
 classifier = Classifier()
 
+def loadmetadata():
+	metas = pd.read_csv("GameMetadataWithHalftimes.csv")
+	metas['Start' ] = metas['Start'].map(lambda x : parser.parse(x))
+	metas['End' ] = metas['End'].map(lambda x : parser.parse(x))
+	metas['htbegin' ] = metas['htbegin'].map(lambda x : parser.parse(x))
+	metas['htend' ] = metas['htend'].map(lambda x : parser.parse(x))
+
+	return metas
+
 # define a useful timezone constant
 eastern = pytz.timezone('US/Eastern')
-
 
 # Simple lambda function
 def split(x, num):
