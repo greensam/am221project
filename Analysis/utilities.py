@@ -161,7 +161,28 @@ def fullgame(row, sam = True):
 	return dt1, addrelevancedf(classifydf(dt2), eid)
 
 
+def addclocktoeventdf(eventdf, gamemeta):
+	
+	lenhalf1, lenhalf2 = gamemeta['htbegin']-gamemeta['Start'], gamemeta['End']-gamemeta['htend']
+	eventdf['FirstHalf'] = eventdf.apply(lambda r : r['PercDone'] <= 50, axis = 1)
 
+	def delta(half, time):
+		if half == True:
+		    return timedelta(seconds = (lenhalf1.seconds * (time/50)))
+		else:
+		    return timedelta(seconds = (lenhalf2.seconds * ((time-50)/50)))
+
+	eventdf['Delta'] = eventdf.apply(lambda r : delta(r['FirstHalf'], r['PercDone']), axis=1)
+
+	def addclock(row):
+		if row['FirstHalf']:
+			return row['Delta'] + gamemeta['Start']
+		else:
+			return row['Delta'] + gamemeta['htend']
+
+	eventdf['WallClockTime'] = eventdf.apply(addclock, axis=1)
+
+	return eventdf
 
 
 
