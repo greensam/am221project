@@ -25,10 +25,10 @@ classifier = Classifier()
 
 def loadmetadata():
 	metas = pd.read_csv("GameMetadataWithHalftimes.csv")
-	metas['Start' ] = metas['Start'].map(lambda x : parser.parse(x))
-	metas['End' ] = metas['End'].map(lambda x : parser.parse(x))
-	metas['htbegin' ] = metas['htbegin'].map(lambda x : parser.parse(x))
-	metas['htend' ] = metas['htend'].map(lambda x : parser.parse(x))
+	metas['StartObj'] = metas['Start'].map(lambda x : parser.parse(x))
+	metas['EndObj'] = metas['End'].map(lambda x : parser.parse(x))
+	metas['htbegin'] = metas.apply(lambda r : parser.parse(r['htbegin']).replace(day=r['StartObj'].day, month=r['StartObj'].month,year=r['StartObj'].year),axis=1)
+	metas['htend'] = metas.apply(lambda r : parser.parse(r['htend']).replace(day=r['StartObj'].day, month=r['StartObj'].month,year=r['StartObj'].year),axis=1)
 
 	return metas
 
@@ -87,8 +87,8 @@ def ncaatrendgraph(gameid):
 
 	# Make this data into a Dataframe
 	bsd = pd.DataFrame(qes, columns = ['Minutes', 'Seconds', 'Team', 'Event', 'Score'])
-	bsd[away] = bsd['Score'].apply(lambda x: split(x, 0))
-	bsd[home] = bsd['Score'].apply(lambda x: split(x, 1))
+	bsd['Team1'] = bsd['Score'].apply(lambda x: split(x, 0))
+	bsd['Team2'] = bsd['Score'].apply(lambda x: split(x, 1))
 	bsd = bsd.drop('Score', 1)
 
 	# # Write a quick function converting the minutes and seconds to a percentage
@@ -102,6 +102,15 @@ def ncaatrendgraph(gameid):
 
 def classifydf(df):
 	df['sentiment'] = df['text'].map(lambda x : classifier.classify(x))
+	def senttonum(sent):
+		if sent == 'neutral' or sent == 'irrelevant':
+			return 0
+		elif sent == 'positive':
+			return 1
+		else:
+			return -1 
+
+	df['sentnum'] = df['sentiment'].map(lambda s : senttonum(s))
 	return df
 
 def fullgame(row, sam = True):
@@ -117,8 +126,9 @@ def fullgame(row, sam = True):
     # Get the important metadata and define a useful constant
     # gmdat = pd.read_csv("GameMetadata.csv")
     # metadat = gmdat[((gmdat['Team1'] == gp1) | (gmdat['Team1'] == gp2)) & ((gmdat['Team2'] == gp1) | (gmdat['Team2'] == gp2))]
-	
+
 	begin, end = datetime.strptime(row['Start'], '%H:%M'), datetime.strptime(row['End'], '%H:%M')
+
 
 	if end < begin:
 		end = end + timedelta(days = 1)
@@ -126,7 +136,8 @@ def fullgame(row, sam = True):
 	lenhalf = 20*60
     
     # Grab the game data for the time period
-	dt1 = ncaatrendgraph(eid) # Usually gdata
+	dt1 = ncaatrendgraph(eid)
+	dt1['Margin'] = dt1['Team1'] - dt1['Team2'] # Usually gdata
 	# dt1 = gamevents(gdata, tp1, tp2, begin, end)
 
     # Grab the relevant data from the twitter file
@@ -154,7 +165,7 @@ def fullgame(row, sam = True):
 	if len(indices) > 0:
 		dt2 = tweets[tweets.index.isin(indices)]
 		dt2['time'] = tweets['time'].map(lambda t : parser.parse(t).replace(tzinfo=None))
-		return dt1, addrelevancedf(classifydf(dt2), eid)
+		return addclocktoeventdf(dt1, row), addrelevancedf(classifydf(dt2), eid)
 	
 	indices = []
 	for num in range(0, len(tweets['time_chg'])):
@@ -166,12 +177,12 @@ def fullgame(row, sam = True):
 	dt2 = tweets[tweets.index.isin(indices)]
 	dt2['time'] = dt2['time'].map(lambda t : parser.parse(t).replace(tzinfo=None))
  
-	return dt1, addrelevancedf(classifydf(dt2), eid)
+	return addclocktoeventdf(dt1, row), addrelevancedf(classifydf(dt2), eid)
 
 
 def addclocktoeventdf(eventdf, gamemeta):
 	
-	lenhalf1, lenhalf2 = gamemeta['htbegin']-gamemeta['Start'], gamemeta['End']-gamemeta['htend']
+	lenhalf1, lenhalf2 = gamemeta['htbegin']-gamemeta['StartObj'], gamemeta['EndObj']-gamemeta['htend']
 	eventdf['FirstHalf'] = eventdf.apply(lambda r : r['PercDone'] <= 50, axis = 1)
 
 	def delta(half, time):
@@ -184,9 +195,9 @@ def addclocktoeventdf(eventdf, gamemeta):
 
 	def addclock(row):
 		if row['FirstHalf']:
-			return row['Delta'] + gamemeta['Start']
+			return row['Delta'] + gamemeta['StartObj'] + timedelta(hours=4)
 		else:
-			return row['Delta'] + gamemeta['htend']
+			return row['Delta'] + gamemeta['htend'] + timedelta(hours=4)
 
 	eventdf['WallClockTime'] = eventdf.apply(addclock, axis=1)
 
