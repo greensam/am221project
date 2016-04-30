@@ -141,9 +141,10 @@ def fullgame(row, sam = True):
 	lenhalf = 20*60
     
     # Grab the game data for the time period
-	dt1 = ncaatrendgraph(eid)
-	dt1['Margin'] = dt1['Team1'] - dt1['Team2'] # Usually gdata
+	# dt1 = ncaatrendgraph(eid)
+	# dt1['Margin'] = dt1['Team1'] - dt1['Team2'] # Usually gdata
 	# dt1 = gamevents(gdata, tp1, tp2, begin, end)
+	dt1 = pd.DataFrame()
 
     # Grab the relevant data from the twitter file
 	fname = row['Filename']
