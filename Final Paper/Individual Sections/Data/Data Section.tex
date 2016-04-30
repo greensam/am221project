@@ -1,0 +1,132 @@
+\documentclass[12pt]{article}
+\usepackage[hmargin=1in,vmargin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{sectsty}
+\usepackage{fancyvrb}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage[flushleft]{threeparttable}
+
+% Make all of the environments for different proof elements
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newenvironment{proof}[1][Proof:]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\usepackage{hyperref}
+\usepackage[usenames, dvipsnames]{color}
+
+\definecolor{cuse}{RGB}{212, 69, 0}
+\definecolor{uva}{RGB}{0, 55, 119}
+
+% Change back to use Arabic footnotes
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+\sectionfont{\large}
+\subsectionfont{\normalsize}
+
+% Start the document
+\begin{document}
+\setcounter{page}{1}
+\begin{doublespacing}
+
+\title{Draft Data Section}
+\author{David Freed and Samuel Green}
+\date{April 30, 2016}
+\maketitle
+
+Our dataset consists of approximately 1 million Tweets made during the 2016 National Collegiate Athletic Association (henceforth, ``NCAA") Men's Basketball Tournament (henceforth, ``March Madness''). Before describing how we acquired and classified Tweets, we briefly describe March Madness and the basketball-related data we collected. 
+
+\section*{Game Data}
+
+March Madness, the largest single-elimination tournament in major American sports, is one of the most important events on the U.S. sporting calendar. The tournament takes place from mid-March to early April, with the 68-team field shrinking to sixteen after the first weekend. On the following weekend, the so-called ``Sweet Sixteen" compete for a spot in the ``Final Four"---the given name for the national semifinals. The 67-game tournament, which takes teams from across the country,\footnote{In fact, nearly every major school is eligible to compete in March Madness. The tournament reserves 33 spots for the winners of each major Division I athletic conference, leaving an automatic berth available for 351 colleges and universities across the nation} is the NCAA's primary source of revenue---in 2015, it comprised 90 percent of the organization's total revenue. 
+
+We chose to look at March Madness game data because of the level of excitement surrounding the event. Unlike other sports that share the same athletic calendar---most prominently, the National Basketball Association (henceforth, ``NBA'')---there are rarely more than two March Madness games occurring at once and so the entire focus is on the current game. 
+
+The level of interest surrounding an average March Madness game is much higher than that for a regular season mid-week NBA contest; the tournament encourages fans, regardless of their level of expertise, to fill out a bracket predicting the outcome. This cultural phenomenon has exploded in recent years, with ESPN receiving 13 million brackets this year. From the brackets arises an intense gambling market (more than \$9 billion in 2016), raising interest and attention in the games. 
+
+%% Image 1: Basic Result From Box Score Scraper
+\begin{figure} [H]
+	\centering
+	\includegraphics[scale = 0.4] {Images/Cuse_UVA_MarginOverTime.png} 
+	\caption{Score over time for Syracuse-Virginia Elite Eight contest}
+\end{figure}
+
+For each 2016 March Madness contest, we scraped \texttt{ESPN.com} to secure play-by-play data for each contest. From the website, we were able to get the scores for each team at every point in time, as well as a description of every event (i.e. ``Paige, Marcus hits a three-pointer"). Figure 1 above shows the evolution of a Syracuse-Virginia Elite Eight contest, with Syracuse coming back from a 14-point deficit to take a late lead and storm into the Final Four. 
+
+\section*{Twitter Data}
+
+After obtaining our game data, we sought to collect a series of Tweets for each event to gauge public sentiment while the game was happening. In order to do this, we set up a Tweet listener while the game was actually going on, recording the Tweets as they were sent for an hour before and an hour after each game. 
+
+In order to detect which Tweets were relevant, we only pulled Tweets that had a certain set of hashtags. Following the blueprint of Sinha et al. (2013), we constructed a set of Tweets associated with each game manually, scrolling through the official Twitter accounts of each individual team and adding the most commonly used hashtags to our list. 
+\vspace{1cm}
+%% Image 2: Basic Example Set of Hashtags
+\begin{figure} [H]
+    \begin{center}
+    \#\texttt{NCAATournament} \#\texttt{MarchMadness} \#\texttt{LetsDance} \\ 
+    \#\texttt{NCAATOURNAMENT} \#\texttt{CBB} \#\texttt{NCAAB} \\ 
+    \#\texttt{SyracusevsVirginia} \textcolor{cuse}{\#\texttt{Syracuse}} \textcolor{cuse}{\#\texttt{Cuse}} \\ 
+    \textcolor{cuse}{\#\texttt{OrangeCrush}} \textcolor{cuse}{\#\texttt{CuseMode}} \textcolor{uva}{\#\texttt{Virginia}} \\ 
+    \textcolor{uva}{\#\texttt{UVA}} \textcolor{uva}{\#\texttt{GoHoos}} \textcolor{uva}{\#\texttt{Cavaliers}} \\
+    \caption{Set of NBA hashtags for UVA-Syracuse Elite Eight game.}
+    \end{center}
+\end{figure}
+
+Figure 2 above demonstrates the set of hashtags used for the UVA-Syracuse game. Hashtags in black are hashtags that were not related to either team and common to all sets of tags.\footnote{With the caveat that the final Tweet, "\#SyracusevsVirginia", was altered in each case to refer only to the teams playing in the game.} The other hashtags were taken directly from the official Twitter accounts of the two schools and are colored in relation to which school they refer to. 
+
+To get a sufficient cross-section of data, we took Tweets corresponding to 43 separate games. Fifty-four of the 68 teams participated in at least one game in our dataset. All in all, we collected over 1 million Tweets, with an average of roughly 21,000 Tweets per game. 
+
+%% Image 3: Number of Tweets as a Histogram
+\begin{figure} [H]
+	\centering
+	\includegraphics[scale = 0.4] {Images/TweetVolumeByGame.png} 
+	\caption{Tweet volume by contest}
+\end{figure}
+
+Figure 3 above shows the distribution of Tweets per game. The number of Tweets increased as the tournament went on; while first-round games had an average of just about 12.7 thousand Tweets a contest, there were an average of 15.8 thousand Tweets about each Sweet Sixteen contest in our dataset. Figure 3 excludes the national title game between Villanova and the University of North Carolina, which garnered just under 160,000 total tweets---by far the most in the dataset. 
+
+Once we had the two datasets, we set out to match the two to one another. Our source for game data did not log the exact moment at which each event occurred in real time, just in game time. To map game time (i.e. ``11:30, first half'') to real time (``9:30 PM''), we used a rough approximation algorithm. For each game, we manually took the beginning and end times of each game from \texttt{ESPN.com} and \texttt{@marchmadness}, the official Twitter handle of the NCAA Tournament and used that information to estimate the length of each half. From that data, we estimated the time each event happened as a function of the length of each half and the time remaining in each half, using a modified uniform approximation to match game times to real times. 
+
+%% Image 4: Twitter Volume over time 
+\begin{figure} [H]
+	\centering
+	\includegraphics[scale = 0.4] {Images/Total_TweetVolume.png} 
+	\caption{Tweet counts over time for UVA-Syracuse}
+\end{figure}
+
+Figure 4 above demonstrates the results of the mapping, which allowed us to identify exactly when halftime and key game events occurred in real time. As seen in the above graph, there was a significant spike in Twitter traffic during the pivotal moments of the game---a 25-4 run by Syracuse that brought the team from 14 points down into the lead. The associated large spike in Twitter traffic seen in the above figure reflects a common trend across the data: when the game got more exciting, Tweet volume spiked. 
+
+The next classification we made to the data was to classify each Tweet according to which team it related to. Since the eventual goal of the project was to be able to classify public sentiment towards any given team at any point in time, our intermediate step was to associate each Tweet with a team based on the content of its message. 
+
+To classify the subject of each Tweet, we created a list of relevant tags\footnote{In addition to using the tags shown in Figure 2, we scraped the last names of the seven best players for each team and the coach of the team. In many cases, we found that Tweets included both team names (i.e. `` ... \#Virginia \#Syracuse'') but were actually about one team or the other. Including the last names of the players increased the accuracy of our classifier, since it better differentiated amongst these Tweets.} for each time and identified how often they showed up in the Tweet. From this, we computed a weighted relevance score for both teams, dividing the Tweets according to their relevance score for each team (i.e. those with a higher relevance score for Syracuse were tagged as `Syracuse-related' Tweets).  
+
+%% Image 5: Twitter Volume over time by subject
+\begin{figure} [H]
+	\centering
+	\includegraphics[scale = 0.4] {Images/Cuse_UVA_TweetVolume.png} 
+	\caption{Tweets counts by subject over time for UVA-Syracuse}
+\end{figure}
+
+Figure 5 above breaks down the Tweet volume data by team, demonstrating that the spike in traffic during Syracuse' run comes almost entirely from people Tweeting about their comeback. We can see that when trailing early in the game, very few people were Tweeting about Syracuse; likewise, when Virginia opened up at a 14-point lead at halftime, they saw a brief bump in traffic during the 20-minute intermission. 
+
+The final step in our data collection was to classify the sentiment of each Tweet. In order to tell whether public opinion was positive or negative for each team over time, we constructed a sentiment classifier for individual Tweets. We chose a linear-kernel Support Vector Machine as our primary classifier, using a standard bag-of-words methodology and training the model on a prior labeled corpus of over 4000 words\footnote{We had to make minor mechanical adjustments to the model due to the oddities of the language surrounding basketball; while words like `dirty', `filthy', and `disgusting' would be classified as negative sentiments in almost any social context, they are the highest of compliments that can be paid on a basketball court}. 
+
+%% Image 6: Twitter sentiment over time by team
+\begin{figure} [H]
+	\centering
+	\includegraphics[scale = 0.4] {Images/Cuse_UVA_TweetSentiment.png} 
+	\caption{Tweet sentiment over time for UVA-Syracuse}
+\end{figure}
+
+Figure 6 above demonstrates the results of our classifier. We grouped Tweets into three categories: positive, negative, and neutral. In order to come up with an aggregate sentiment at any point in time, we took a simple linear combination of the three numbers---with our weights determined by the relative sensitivity of our classifier.\footnote{Since our classifier was more sensitive to positive speech than negative speech, we gave a higher coefficient to the amount of negative Tweets, assuming that they were an under-representation of the general sentiment}. 
+
+The results, demonstrated above, were fascinating. During the Syracuse-UVA game, we can clearly see that as Syracuse falls behind, public sentiment drops into the negatives. An 8-0 run during the latter stages of the first half generates a lot of positive public sentiment, but during the half, the public begins to support Virginia (who has a 14-point lead). As Syracuse makes its comeback in the second half, however, Virginia plateaus and sentiment on Twitter shifts very strongly towards the Orange. As demonstrated in the forthcoming sections, this is evidence of the reactionary public sentiment to changes in the box score. 
+
+\end{doublespacing}
+\end{document}
