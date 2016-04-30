@@ -25,8 +25,13 @@ classifier = Classifier()
 
 def loadmetadata():
 	metas = pd.read_csv("GameMetadataWithHalftimes.csv")
-	metas['StartObj'] = metas['Start'].map(lambda x : parser.parse(x))
-	metas['EndObj'] = metas['End'].map(lambda x : parser.parse(x))
+
+	# metas['StartDate'] = metas['StartDate'].map(lambda x : parser.parse(x))
+	# metas['EndDate'] = metas['EndDate'].map(lambda x : parser.parse(x))	
+
+	metas['StartObj'] = metas['DT_Start'].map(lambda d : parser.parse(d)) # .replace(day=r['StartDate'].day, month=r['StartDate']).month,axis=1)
+	metas['EndObj'] = metas['DT_End'].map(lambda d : parser.parse(d)) # .replace(day=r['EndDate'].day, month=r['EndDate']).month, axis=1)
+
 	metas['htbegin'] = metas.apply(lambda r : parser.parse(r['htbegin']).replace(day=r['StartObj'].day, month=r['StartObj'].month,year=r['StartObj'].year),axis=1)
 	metas['htend'] = metas.apply(lambda r : parser.parse(r['htend']).replace(day=r['StartObj'].day, month=r['StartObj'].month,year=r['StartObj'].year),axis=1)
 
@@ -136,9 +141,10 @@ def fullgame(row, sam = True):
 	lenhalf = 20*60
     
     # Grab the game data for the time period
-	dt1 = ncaatrendgraph(eid)
-	dt1['Margin'] = dt1['Team1'] - dt1['Team2'] # Usually gdata
+	# dt1 = ncaatrendgraph(eid)
+	# dt1['Margin'] = dt1['Team1'] - dt1['Team2'] # Usually gdata
 	# dt1 = gamevents(gdata, tp1, tp2, begin, end)
+	dt1 = pd.DataFrame()
 
     # Grab the relevant data from the twitter file
 	fname = row['Filename']

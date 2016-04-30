@@ -73,8 +73,52 @@
 % Introduction
 \section{Introduction}
 
+The world-wide sports betting market, by some estimates, transacting between 700 billion and 1 trillion dollars per year.\footnote{http://www.statista.com/topics/1740/sports-betting/}
+Understanding this market, and doing so more effectively
+than others, makes a very enticing value proposition:
+beat the bookies, and one can turn a predictable profit. But is this possible? 
+
+Sports fans, ever the arm-chair experts, might like to think so.
+For the most part, individual fan opinions can seem biased, or even ridiculous.
+In this paper, we explore whether a signal, or some ``wisdom from the crowd,'' can be distilled
+from the noise of individual observers, specifically on commentators on Twitter. Using
+a large dataset collected during the 2016 NCAA March Madness tournament, 
+we explore the predictive quality of relevant tweets and if these tweets can provide advance
+indicatation of how a game is proceeding.
+
+We begin by reviewing some current literature on predictive sports analysis using Twitter data.
+We then summarize the data collection process and describe the dataset that we have assembled. 
+We then present analysis of relationships between tweets and game outcomes, and we {\bf conclude
+by placing a 5,000,000 bet on the next possible basketball game using our \#winning model.}
+
 % Literature Review
 \section{Overview of Related Literature}
+
+Previous literature has established taht useful modeling information can be
+derived from Twitter data, some including work using sentiment analysis, with the body of work mostly focused on the NFL. 
+
+A real-time system was built in 2012 using volumes of 
+tweets related to National Football League (NFL) games to 
+isolate significant game
+events=. That project characterized a 
+difference between human- and machine-generated tweets
+based on posting rates, and, by discriminating between 
+different varieties of users, the system could 
+identify events in near real-time. The event detection
+system leveraged pre-selected sets of hashtags
+to isolate relevant tweets as input to the system. (Zhao et al, 
+2012)\footnote{http://arxiv.org/pdf/1205.3212v1.pdf}. 
+
+Sentiment analysis has also been previously applied
+to Twitter data to a predictive model for NFL games. 
+In 2013, Sinha et al. found that Twitter data collected
+in advance of weekly NFL games could be used effectively
+to predict the outcomes of games more successfully than
+methods using other traditional statistical models. Their
+work used a dataset of tweets collected over periods 
+in advance of games and also collected tweets by 
+building sets of hashtags related to participant teams.
+\footnote{https://www.cs.cmu.edu/~nasmith/papers/sinha+dyer+gimpel+smith.mlsa13.pdf}
 
 % Literature Review
 \section{Data Overview}

@@ -53,14 +53,14 @@ the object that results from this call
 with obj.classify(text) 
 where text is the text of the tweet. 
 """
-def sentiment_classifier(sensitivity=100):
+def sentiment_classifier(debug):
 	# trainingfp = open('training.csv', 'rb')
 	train = pd.read_csv( 'training.csv', delimiter=',', quotechar='"', escapechar='\\',header=0 )
 	num_tweets = train['TweetText'].size
 	
 	cleantweets = []
 	for i in xrange(0, num_tweets):
-		if( (i+1)%1000 == 0 ):
+		if debug and ( (i+1)%1000 == 0 ):
 			print "Tweet %d of %d\n" % ( i+1, num_tweets )          
 		cleantweets.append((tweet_to_words(train['TweetText'][i]), train['Sentiment'][i]))
 
@@ -83,8 +83,8 @@ def sentiment_classifier(sensitivity=100):
 
 class Classifier():
 	
-	def __init__(self):
-		trained = sentiment_classifier()
+	def __init__(self, debug=False):
+		trained = sentiment_classifier(debug)
 	
 		self.forest = trained
 		# self.vectorizer = trained[1]
