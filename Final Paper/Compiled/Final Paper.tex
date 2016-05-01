@@ -73,23 +73,59 @@
 % Introduction
 \section{Introduction}
 
-The world-wide sports betting market, by some estimates, transacts between 700 billion and 1 trillion dollars per year.\footnote{http://www.statista.com/topics/1740/sports-betting/}
+The world-wide sports betting market, by some estimates, transacts 
+between 700 billion and 1 trillion dollars per year.\footnote{http://www.statista.com/topics/1740/sports-betting/}
 Understanding this market, and doing so more effectively
 than others, makes a very enticing value proposition:
-beat the bookies, and one can turn a predictable profit. But is this possible? 
+beat the bookies, and one can turn a predictable profit. But is this possible? Sports fans,
+ever the arm-chair experts, might like to think so.
+However, individual fan opinions seem biased, or often even ridiculous.
 
-Sports fans, ever the arm-chair experts, might like to think so.
-For the most part, individual fan opinions can seem biased, or even ridiculous.
 In this paper, we explore whether a signal, or some ``wisdom from the crowd,'' can be distilled
-from the noise of individual observers, specifically on commentators on Twitter. Using
-a large dataset collected during the 2016 NCAA March Madness tournament, 
-we explore the predictive quality of relevant tweets and if these tweets can provide advance
-indicatation of how a game is proceeding.
+from the noise of individual observers. In this study,
+we consider Twitter data from 42 NCAA March Madness 
+games to expand on previous work that established
+a link between crowd-wisdom and prediction of game events.
+Ultimately, we show that volumes of relevant tweets and sentiment
+analysis of those tweets can be used to improve over 
+standard models used to predict March Madness games.
 
-We begin by reviewing some current literature on predictive sports analysis using Twitter data.
-We then summarize the data collection process and describe the dataset that we have assembled. 
-We then present analysis of relationships between tweets and game outcomes, and we {\bf conclude
-by placing a 5,000,000 bet on the next possible basketball game using our \#winning model.}
+After reviewing some previous work that used Twitter for sports analytics,
+we begin by describing the dataset and the data collection and cleaning process,
+which was non-trivial.
+
+To establish a baseline for further analysis, we then show
+empirically that tweets relevant to a game in progress
+respond both in volume and in sentiment to events in
+that game. We use this result to justify the hypothesis that 
+tweets contain information about game progress. From this
+result, we show that the relevant Twitter data can be 
+used to establish statistically significant predictions
+about future events in the game. We demonstrate this 
+relationship both between tweet sentiment and game
+events and between tweet volume and game events. We also
+show that predictive power accumulates in the course 
+of a game: in other words, that the aggregated total 
+volume and sentiment of tweets up to and including time $t - 1$
+can be used to make predictions about events in the game
+at time $t$. 
+
+After establishing the period-to-period significance
+of the Twitter data, we consider the usefulness
+of tweets in making period-to-period predictions
+of the winners of each game. We show that tweets,
+both sentiments and volumes, and be used to 
+improve over the standard Vegas Line model
+used to form online probability curves during
+games. With this result, we conclude that that
+a properly filtered dataset of tweets 
+contains practically useful information
+for real-time prediction during NCAA tournament
+games, presenting a promising avenue for further
+applications to the NBA and other sports. 
+
+
+
 
 % Literature Review
 \section{Overview of Related Literature}

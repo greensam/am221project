@@ -1,7 +1,7 @@
 \contentsline {section}{\numberline {1}Introduction}{2}
-\contentsline {section}{\numberline {2}Overview of Related Literature}{2}
+\contentsline {section}{\numberline {2}Overview of Related Literature}{3}
 \contentsline {section}{\numberline {3}Data Overview}{3}
-\contentsline {subsection}{\numberline {3.1}Game Data}{3}
+\contentsline {subsection}{\numberline {3.1}Game Data}{4}
 \contentsline {subsection}{\numberline {3.2}Twitter Data}{5}
 \contentsline {section}{\numberline {4}Empirical Results}{11}
 \contentsline {section}{\numberline {5}Discussion}{11}

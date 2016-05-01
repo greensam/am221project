@@ -28,7 +28,7 @@ fitSentMargin <- lm(SentDiff_Period~Margin_Period_Lag1, data=sgdf_data0430)
 
 # add standard controls
 # SentDiff_T ~ Margin_T-1 + Controls
-fitSentMarginControls <- lm(SentDiff_Period ~ Margin_Period_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+fitSentMarginControls <- lm(SentDiff_Period ~ Margin_Period_Lag1 + Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
 
 # add a second lag + controls
 # SentDiff_T ~ Margin_T-1 + Margin_T-2 + Controls
@@ -202,10 +202,6 @@ glm.VolumeSentiment =  glm(Winner~Vegas_Line + Margin_TOT + VolDiff_Total + Sent
 ###################################################
 			# End Regression Family 2 # 
 ###################################################
-
-
-
-
 
 
 
