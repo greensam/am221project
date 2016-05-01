@@ -138,7 +138,28 @@ for (i in 5:40){
   ps[i] <- p 
 }
 
+# Question 3
+# Does Twitter volume result to big events (which we'll call magnitude of margin)
+fitBigEvent <- lm(Vol_Total~abs(Margin_Period_Lag1), data=sgdf_data0430)
+summary(fitBigEvent)
+# answer with no controls: kind of. 
 
+# what about when controlling for team followers
+fitBigEvent <- lm(Vol_Total~abs(Margin_Period_Lag1) + Team1Twitter + Team2Twitter, data=sgdf_data0430)
+summary(fitBigEvent)
+# still kind of, which is a good sign! 
+
+# What about total margin? 
+fitBigEventTotal <- lm(Vol_Total~abs(Margin_TOT), data=sgdf_data0430)
+summary(fitBigEventTotal)
+
+# Interactions with team twitter statistics? 
+fitBigEventTotalTwitter <- lm(Vol_Total~abs(Margin_TOT) + Team1Twitter + Team2Twitter, data=sgdf_data0430)
+summary(fitBigEventTotalTwitter)
+
+# How about some lags
+fitVolMarginLabs <- lm(Vol_Total~abs(Margin_Period) + abs(Margin_Period_Lag1) + abs(Margin_Period_Lag2), data=sgdf_data0430)
+summary(fitVolMarginLabs)
 
 
 
