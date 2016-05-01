@@ -73,59 +73,25 @@
 % Introduction
 \section{Introduction}
 
-The world-wide sports betting market, by some estimates, transacts 
-between 700 billion and 1 trillion dollars per year.\footnote{http://www.statista.com/topics/1740/sports-betting/}
-Understanding this market, and doing so more effectively
-than others, makes a very enticing value proposition:
-beat the bookies, and one can turn a predictable profit. But is this possible? Sports fans,
-ever the arm-chair experts, might like to think so.
-However, individual fan opinions seem biased, or often even ridiculous.
+The wisdom of the crowds is not a new phenomenon. Economists treat the collective opinion of independent rational agents as sacrosanct; efficient market hypotheses are, at their core, expressing a fundamental belief in the wisdom of the crowds. Statisticians can explain the idea as the reduction of systemic risk---the variance of the sum of $n$ independent and identically distributed random variables is smaller than the variance of any individual r.v. by a factor of $\frac{1}{n}$. In politics, prediction markets have quickly become a better predictor of election results than polls or the opinions of the experts\footnote{http://www.wnd.com/2016/01/prediction-markets-more-accurate-than-polls}.
 
-In this paper, we explore whether a signal, or some ``wisdom from the crowd,'' can be distilled
-from the noise of individual observers. In this study,
-we consider Twitter data from 42 NCAA March Madness 
-games to expand on previous work that established
-a link between crowd-wisdom and prediction of game events.
-Ultimately, we show that volumes of relevant tweets and sentiment
-analysis of those tweets can be used to improve over 
-standard models used to predict March Madness games.
+The last example evidences the importance of being able to properly assess the wisdom of the crowds. While betting on political elections is illegal in the United States, the number of bets on the current presidential race is up fourfold since 2012 in Ireland.\footnote{http://abcnews.go.com/Politics/las-vegas-bets-hillary-clinton-literally/story?id=30897911} Betfair, the largest online betting exchange for U.S. presidential elections, has nearly one million users and records nearly seven million transactions a day, which it claims is ``more than all European stock exchanges combined''.\footnote{http://corporate.betfair.com/about-us/betfair-facts.aspx} In this cutthroat industry, any edge a gambler can get matters. 
 
-After reviewing some previous work that used Twitter for sports analytics,
-we begin by describing the dataset and the data collection and cleaning process,
-which was non-trivial.
+The betting market on politics pales next to the worldwide sports betting market---a colossal enterprise whose size experts ballpark at around \$1 trillion dollars a year. In a market with roughly the GDP of Indonesia, understanding the underlying statistics (in this case, the relative quality of the teams) is fundamental. Any bettor who can consistently outperform the crowds can turn a predictable profit; one has to win only 52.4 percent of his bets to break even in Vegas. 
 
-To establish a baseline for further analysis, we then show
-empirically that tweets relevant to a game in progress
-respond both in volume and in sentiment to events in
-that game. We use this result to justify the hypothesis that 
-tweets contain information about game progress. From this
-result, we show that the relevant Twitter data can be 
-used to establish statistically significant predictions
-about future events in the game. We demonstrate this 
-relationship both between tweet sentiment and game
-events and between tweet volume and game events. We also
-show that predictive power accumulates in the course 
-of a game: in other words, that the aggregated total 
-volume and sentiment of tweets up to and including time $t - 1$
-can be used to make predictions about events in the game
-at time $t$. 
+In our paper, we tackle the common questions about the wisdom of the crowds from a different angle: instead of asking whether crowds or experts, alone or in aggregate, can predict games before they happen, we look at their ability to understand and predict games that are ongoing. We consider Twitter data from 43 games in the National Collegiate Athletic Association (henceforth, ``NCAA'') Men's Basketball Tournament (henceforth, ``March Madness'') to identify metrics that gauge the level of interest and the sentiment of the crowd at any point in time. 
 
-After establishing the period-to-period significance
-of the Twitter data, we consider the usefulness
-of tweets in making period-to-period predictions
-of the winners of each game. We show that tweets,
-both sentiments and volumes, and be used to 
-improve over the standard Vegas Line model
-used to form online probability curves during
-games. With this result, we conclude that that
-a properly filtered dataset of tweets 
-contains practically useful information
-for real-time prediction during NCAA tournament
-games, presenting a promising avenue for further
-applications to the NBA and other sports. 
+The justification for using Twitter as a predictive mechanism is simple: it can update far quicker than standard predictors like the margin of the game. If a star player goes down with injury or picks up a fourth or fifth foul---forcing him out of the game---the immediate effect will not be seen in the margin, but Twitter users will be able to accurately process the effect it will have on the game. Likewise, while Twitter can distinguish margins that are unsustainable (e.g. leads built on fluky plays or low-percentage shots) and those that are not, standard statistical models have a difficult time doing so. 
 
+Prior research has taken a cursory look at these questions; previous studies of National Football League (henceforth, ``NFL'') games identified that the volume of Tweets before a game is predictive of the final outcome and that Twitter is reactive to big plays in the game. Our work builds upon these analyses, not only by substantiating prior results for a different sport\footnote{Given the differences between football and basketball, this is a non-trivial contribution. Since basketball has far fewer breaks than football, one might imagine that Twitter would be significantly slower to reach to big events (fewer timeouts and breaks of play with which to process what happened). We show this not to be true in the Empirical Results section.} but also by distinguishing between Tweet volume and Tweet sentiment. Prior papers considered only the volume of Tweet in each contest to measure the wisdom of the crowd; we use a sentiment classifier to determine how Twitter feels about both teams and how that evolves over the course of the game. In our Empirical Results section, we demonstrate that Twitter sentiment has predictive power that Twitter volume does not.  
 
+Our paper has three main results. First, to establish a baseline for our future analysis, we demonstrate empirically that Twitter is responsive to important game events---Twitter volume and sentiment will increase in response to salient changes in the score. This provides evidence for our initial claim that Twitter is responsive to the events currently going on in the game.  
 
+After showing that Twitter can capture what has happened in the past, we argue that Twitter is a useful predictor of what happens in the future. Our second result demonstrates that Twitter sentiment and Twitter volume is a statistically significant predictor of future changes in margin; the aggregate Twitter sentiment in any period\footnote{This is roughly measured as the support for one team minus the support for another team.} is predictive of the change in margin in the next period. Here we find evidence for our prior claim about unobservable data---while margins tend to show mean reversion (i.e. teams that are up by a lot in period $t$ tend to see their margin shrink in period $t+1$) as a whole, Twitter sentiment helps to distinguish which leads will continue to increase. 
+
+Our final result tests whether Twitter data can be used as an effective predictor of the final result at any point during the game. We use logistic regression models to incorporate the sentiment in a given period. We find that the Twitter sentiment is only statistically significant for about the final quarter of the game, but models that include Twitter sentiment outperform standard models\footnote{For the purposes of our analysis, we cite the logistic prediction models rolled out by FiveThirtyEight during this year's March Madness as the standard model for predicting the end of the game} at every single minute of the game. We conclude by showing that incorporating Twitter sentiment is more valuable than simply incorporating raw Twitter volume, as other papers have done. 
+
+The remainder of the paper proceeds as follows. In Section 2, we review the brief literature on the subject, demonstrating both the advances and the gaps in prior research. In Section 3, we detail our data collection process, explaining how we matched gametime data (e.g. ``7:30 remaining in first half'') to real-time data (e.g. ``9:30 PM'') and discussing the construction of both our relevance and sentiment classifiers. In Section 4, we provide an overview of our empirical results and a thorough discussion of the aforementioned three main results and their significance. In Section 5, we conclude and discuss the important caveats and extensions to our work. 
 
 % Literature Review
 \section{Overview of Related Literature}
@@ -253,6 +219,262 @@ The results, demonstrated above, were fascinating. During the Syracuse-UVA game,
 
 % Literature Review
 \section{Tables and Figures}
+
+%% Table 1: How Twitter Responds to Changes in Margin (Sentiment)
+\begin{table}[H] 
+\centering 
+\caption{Twitter Responsiveness to Game Events (pt. 1)} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccc} 
+\hline 
+\hline
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-3.0ex] & \multicolumn{3}{c}{SentDiff\_Period} \\ 
+\\[-1.5ex] & (1) & (2) & (3)\\ 
+\hline
+ Margin\_Period\_Lag1 & 0.891$^{**}$ & 0.881$^{**}$ & 0.910$^{**}$ \\ 
+  & (0.367) & (0.366) & (0.370) \\ 
+ Margin\_Period\_Lag2 &  &  & 0.864$^{**}$ \\ 
+  &  &  & (0.377) \\ 
+ Vegas\_Line &  & $-$1.008$^{***}$ & $-$0.973$^{***}$ \\ 
+  &  & (0.231) & (0.237) \\ 
+ QualityDiff &  & 35.390$^{***}$ & 32.811$^{***}$ \\ 
+  &  & (10.041) & (10.304) \\ 
+ TwitterDiff &  & $-$0.004 & $-$0.006 \\ 
+  &  & (0.011) & (0.011) \\ 
+ Min\_End &  & 0.068 & 0.061 \\ 
+  &  & (0.075) & (0.079) \\ 
+\hline \\[-1.8ex] 
+Observations & 1,306 & 1,306 & 1,266 \\ 
+R$^{2}$ & 0.005 & 0.021 & 0.023 \\ 
+Adjusted R$^{2}$ & 0.004 & 0.017 & 0.018 \\ 
+Residual Std. Error & 30.443 & 30.238 & 30.562 \\ 
+F Statistic & 5.897$^{**}$ & 5.548$^{***}$ & 4.972$^{***}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
+
+%% Table 2: How Twitter Responds to Changes in Margin (Volume)
+\begin{table}[H] 
+\centering 
+\caption{Twitter Responsiveness to Game Events (pt. 2)} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccc} 
+\hline 
+\hline
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-3.0ex] & \multicolumn{3}{c}{VolDiff\_Period} \\ 
+\\[-1.5ex] & (1) & (2) & (3)\\ 
+\hline
+ Margin\_Period\_Lag1 & 6.253$^{***}$ & 5.877$^{***}$ & 6.028$^{***}$ \\ 
+  & (1.259) & (1.237) & (1.246) \\ 
+ Margin\_Period\_Lag2 &  &  & 4.779$^{***}$ \\ 
+  &  &  & (1.268) \\ 
+ Vegas\_Line &  & $-$1.454$^{*}$ & $-$1.416$^{*}$ \\ 
+  &  & (0.781) & (0.797) \\ 
+ QualityDiff &  & 129.964$^{***}$ & 122.143$^{***}$ \\ 
+  &  & (33.914) & (34.662) \\ 
+ TwitterDiff &  & 0.165$^{***}$ & 0.168$^{***}$ \\ 
+  &  & (0.036) & (0.037) \\ 
+ Min\_End &  & $-$0.630$^{**}$ & $-$0.679$^{**}$ \\ 
+  &  & (0.253) & (0.267) \\ 
+\hline \\[-1.8ex] 
+Observations & 1,306 & 1,306 & 1,266 \\ 
+R$^{2}$ & 0.019 & 0.063 & 0.073 \\ 
+Adjusted R$^{2}$ & 0.018 & 0.060 & 0.069 \\ 
+Residual Std. Error & 104.377 & 102.132 & 102.812 \\ 
+F Statistic & 24.685$^{***}$  & 17.550$^{***}$ & 16.599$^{***}$ \\
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
+
+%% Table 3: Twitter Sensitivity to Game Events During Closing Minutes
+\begin{table}[H] 
+\centering 
+\caption{Twitter Responsiveness to Game Events (Closing Minutes)} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc} 
+\hline 
+\hline
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-3.0ex] & \multicolumn{2}{c}{SentDiff\_Period} & \multicolumn{2}{c}{VolDiff\_Period} \\ 
+\\[-1.5ex] & (1) & (2) & (3) & (4)\\ 
+\hline
+ Margin\_Period & 3.080$^{***}$ &  & 9.598$^{***}$ &  \\ 
+  & (0.898) &  & (2.980) &  \\ 
+ Margin\_Period\_Lag1 &  & 1.325 &  & 7.570$^{**}$ \\ 
+  &  & (0.934) &  & (3.071) \\ 
+ Vegas\_Line & $-$1.691$^{***}$ & $-$1.802$^{***}$ & 1.061 & 0.671 \\ 
+  & (0.585) & (0.594) & (1.941) & (1.953) \\ 
+ QualityDiff & 54.306$^{**}$ & 61.013$^{**}$ & 44.282 & 60.681 \\ 
+  & (25.706) & (26.013) & (85.282) & (85.559) \\ 
+ TwitterDiff & $-$0.012 & $-$0.012 & 0.451$^{***}$ & 0.447$^{***}$ \\ 
+  & (0.028) & (0.028) & (0.092) & (0.092) \\ 
+ Min\_End & $-$0.526 & $-$0.719 & $-$2.755 & $-$3.466 \\ 
+  & (0.740) & (0.751) & (2.455) & (2.470) \\ 
+\hline \\[-1.8ex] 
+Observations & 316 & 316 & 316 & 316 \\ 
+R$^{2}$ & 0.068 & 0.039 & 0.133 & 0.121 \\ 
+Adjusted R$^{2}$ & 0.053 & 0.024 & 0.119 & 0.107 \\ 
+Residual Std. Error & 37.840 & 38.427 & 125.537 & 126.387 \\ 
+F Statistic & 4.535$^{***}$ & 2.520$^{**}$ & 9.490$^{***}$ & 8.531$^{***}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
+
+%% Table 4: Can Twitter Sentiment Predict Future Margins
+\begin{table}[H] 
+\centering 
+\caption{The Accuracy of the Crowds (pt. 1)} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccc} 
+\hline 
+\hline
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-3.0ex] & \multicolumn{3}{c}{Margin\_Period} \\ 
+\\[-1.5ex] & (1) & (2) & (3)\\ 
+\hline
+ SentDiff\_Period\_Lag1 & 0.006$^{***}$ & 0.006$^{***}$ & 0.006$^{***}$ \\ 
+  & (0.002) & (0.002) & (0.002) \\ 
+ SentDiff\_Period\_Lag2 &  &  & 0.001 \\ 
+  &  &  & (0.003) \\ 
+ SentDiff\_Period\_Lag3 &  &  & $-$0.003 \\ 
+  &  &  & (0.002) \\ 
+ Vegas\_Line &  & 0.009 & 0.003 \\ 
+  &  & (0.018) & (0.019) \\ 
+ QualityDiff &  & 0.983 & 1.239 \\ 
+  &  & (0.780) & (0.809) \\ 
+ TwitterDiff &  & 0.0003 & 0.0002 \\ 
+  &  & (0.001) & (0.001) \\ 
+ Min\_End &  & 0.004 & 0.007 \\ 
+  &  & (0.006) & (0.006) \\ 
+\hline \\[-1.8ex] 
+Observations & 1,306 & 1,306 & 1,226 \\ 
+R$^{2}$ & 0.006 & 0.012 & 0.015 \\ 
+Adjusted R$^{2}$ & 0.005 & 0.008 & 0.009 \\ 
+Residual Std. Error & 2.342 & 2.338 & 2.344 \\ 
+F Statistic & 7.250$^{***}$ & 3.106$^{***}$ & 2.638$^{**}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
+
+%% Table 5:
+\begin{table}[H] 
+\centering 
+\caption{The Accuracy of the Crowds (pt. 2)} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc} 
+\hline 
+\hline
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-3.0ex] & \multicolumn{4}{c}{Margin\_Period} \\ 
+\\[-1.5ex] & (1) & (2) & (3) & (4)\\ 
+\hline
+  VolDiff\_Period\_Lag1 & 0.002$^{***}$ & 0.002$^{***}$ & 0.002$^{**}$ & 0.003$^{***}$ \\ 
+  & (0.001) & (0.001) & (0.001) & (0.001) \\ 
+ SentDiff\_Period\_Lag1 &  &  & 0.004 &  \\ 
+  &  &  & (0.002) &  \\ 
+ VolDiff\_Period\_Lag2 &  &  &  & 0.0004 \\ 
+  &  &  &  & (0.001) \\ 
+ VolDiff\_Period\_Lag3 &  &  &  & $-$0.002$^{**}$ \\ 
+  &  &  &  & (0.001) \\ 
+ Vegas\_Line &  & 0.006 & 0.009 & 0.0004 \\ 
+  &  & (0.018) & (0.018) & (0.018) \\ 
+ QualityDiff &  & 0.902 & 0.837 & 1.224 \\ 
+  &  & (0.780) & (0.781) & (0.806) \\ 
+ TwitterDiff &  & $-$0.00003 & 0.0001 & 0.00005 \\ 
+  &  & (0.001) & (0.001) & (0.001) \\ 
+ Min\_End &  & 0.005 & 0.005 & 0.008 \\ 
+  &  & (0.006) & (0.006) & (0.006) \\ 
+\hline \\[-1.8ex] 
+Observations & 1,306 & 1,306 & 1,306 & 1,226 \\ 
+R$^{2}$ & 0.009 & 0.014 & 0.016 & 0.021 \\ 
+Adjusted R$^{2}$ & 0.008 & 0.010 & 0.011 & 0.015 \\ 
+Residual Std. Error & 2.338 & 2.335 & 2.334 & 2.337 \\ 
+F Statistic & 11.852$^{***}$ & 3.686$^{***}$ & 3.435$^{***}$ & 3.675$^{***}$  \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
+
+%% Table 6: Reversion to the Mean
+\begin{table}[H] 
+\centering 
+\caption{Reversion to the Mean} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc} 
+\hline 
+\hline
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-3.0ex] & \multicolumn{4}{c}{Margin\_Period} \\ 
+\\[-1.5ex] & (1) & (2) & (3) & (4)\\ 
+\hline
+ Margin\_TOT\_Lag1 & $-$0.018$^{**}$ & $-$0.023$^{***}$ & $-$0.019$^{**}$ & $-$0.024$^{***}$ \\ 
+  & (0.008) & (0.008) & (0.008) & (0.008) \\ 
+ SentDiff\_Total\_Lag1 &  & 0.001$^{**}$ &  & 0.001$^{**}$ \\ 
+  &  & (0.0004) &  & (0.0004) \\ 
+ VolDiff\_Total\_Lag1 &  &  & 0.00004 & 0.00005 \\ 
+  &  &  & (0.0001) & (0.0001) \\ 
+ Vegas\_Line & 0.005 & 0.016 & 0.005 & 0.017 \\ 
+  & (0.018) & (0.019) & (0.018) & (0.019) \\ 
+ QualityDiff & 1.679$^{**}$ & 1.364$^{*}$ & 1.631$^{**}$ & 1.303 \\ 
+  & (0.802) & (0.815) & (0.805) & (0.819) \\ 
+ TwitterDiff & 0.0004 & 0.0005 & 0.0003 & 0.0003 \\ 
+  & (0.001) & (0.001) & (0.001) & (0.001) \\ 
+ Min\_End & 0.002 & 0.001 & 0.002 & 0.002 \\ 
+  & (0.006) & (0.006) & (0.006) & (0.006) \\ 
+\hline \\[-1.8ex] 
+Observations & 1,306 & 1,306 & 1,306 & 1,306 \\ 
+R$^{2}$ & 0.011 & 0.014 & 0.011 & 0.015 \\ 
+Adjusted R$^{2}$ & 0.007 & 0.010 & 0.007 & 0.009 \\ 
+Residual Std. Error & 2.339 & 2.336 & 2.340 & 2.337 \\ 
+F Statistic & 2.865$^{**}$ & 3.111$^{***}$ & 2.454$^{**}$ & 2.744$^{***}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
+
+%% Table 7: Generalized Linear Model
+\begin{table}[H] 
+\centering 
+\caption{Generalized Linear Model} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc} 
+\hline 
+\hline
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-3.0ex] & \multicolumn{4}{c}{Winner} \\ 
+\\[-1.5ex] & (1) & (2) & (3) & (4)\\ 
+\hline
+ Vegas\_Line & $-$0.041$^{***}$ & $-$0.034$^{**}$ & $-$0.044$^{***}$ & $-$0.038$^{***}$ \\ 
+  & (0.014) & (0.014) & (0.014) & (0.014) \\ 
+ Margin\_TOT & 0.173$^{***}$ & 0.166$^{***}$ & 0.168$^{***}$ & 0.160$^{***}$ \\ 
+  & (0.012) & (0.012) & (0.012) & (0.012) \\ 
+ SentDiff\_Total &  & 0.001$^{***}$ &  & 0.001$^{***}$ \\ 
+  &  & (0.0005) &  & (0.001) \\ 
+ VolDiff\_Total &  &  & 0.0002$^{**}$ & 0.0002$^{**}$ \\ 
+  &  &  & (0.0001) & (0.0001) \\ 
+ Constant & $-$1.067$^{***}$ & $-$1.043$^{***}$ & $-$1.074$^{***}$ & $-$1.056$^{***}$ \\ 
+  & (0.109) & (0.112) & (0.112) & (0.114) \\ 
+\hline \\[-1.8ex] 
+Observations & 1,346 & 1,346 & 1,346 & 1,346 \\ 
+Log Likelihood & $-$594.303 & $-$590.365 & $-$591.049 & $-$587.436 \\ 
+Akaike Inf. Crit. & 1,194.606 & 1,188.730 & 1,190.097 & 1,184.873 \\
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
 
 % Literature Review
 \section{Bibliography}
