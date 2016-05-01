@@ -102,30 +102,17 @@ The remainder of the paper proceeds as follows. In Section 2, we review the brie
 % Literature Review
 \section{Overview of Related Literature}
 
-Previous literature has established taht useful modeling information can be
-derived from Twitter data, some including work using sentiment analysis, with the body of work mostly focused on the NFL. 
+Previous literature in this space has established that Twitter data can contain useful information for making predictions about the future. This section proceeds as follows. First, we review the literature on using sentiment classification for Twitter. Second, we reference previous work using Twitter data to conduct sports analysis.
 
-A real-time system was built in 2012 using volumes of 
-tweets related to National Football League (NFL) games to 
-isolate significant game
-events=. That project characterized a 
-difference between human- and machine-generated tweets
-based on posting rates, and, by discriminating between 
-different varieties of users, the system could 
-identify events in near real-time. The event detection
-system leveraged pre-selected sets of hashtags
-to isolate relevant tweets as input to the system. (Zhao et al, 
-2012). 
+Go et al. (2009) provide a useful overview of the empirical work on classifying Twitter data. Prior work established that it is possible to accurately classify Twitter data using a variety of machine learning approaches to sort data according to the express sentiment. Go et al. demonstrate that you can achieve reasonably high classification rate through either a Naive Bayes, Maximum Entropy, or Support Vector Machine approach. In each case, their work proved to be relatively significant. Their work inspires our classification strategy, which is elaborated on later in the paper.\footnote{While the authors were able to demonstrate that a reasonably accurate training set could be derived without necessarily hand-labeling information in the Tweets, we do not reproduce that analysis in our paper.}
 
-Sentiment analysis has also been previously applied
-to Twitter data to a predictive model for NFL games. 
-In 2013, Sinha et al. found that Twitter data collected
-in advance of weekly NFL games could be used effectively
-to predict the outcomes of games more successfully than
-methods using other traditional statistical models. Their
-work used a dataset of tweets collected over periods 
-in advance of games and also collected tweets by 
-building sets of hashtags related to participant teams (Sinha et al., 2013).
+Ibrahim and Yousef (2015) build on the work expressed by Go et al., demonstrating that reasonably accurate Naive Bayes classifiers can in fact be trained by using trivially small datasets of labeled Tweets. This analysis is crucial to the work that we do later in the paper, as it indicates that our corpus is of sufficient size to train an efficient classifier. The work of Ibrahim and Yousef draws on that of Yu and Salton (1976) and Roberson and Spark (1976), some of the original pioneers of the Naive Bayes model.   
+
+This sentiment analysis, to our knowledge, has not yet been applied to sports in terms of an in-game probability model. The majority of win probability models, such as those used by Chase Stuart of Football Outsiders and Nate Silver of FiveThirtyEight, are based on the margin of the game and some ex ante measure of how good each team is. We discuss these models later in our paper. 
+
+This is not to say that there has not been prior work on using Twitter to model the outcomes of sports contests. Sinha et al. (2013) assembled a large dataset of Tweets related to National Football League (henceforth, ``NFL'') games and used the Twitter volume for each team to predict the outcome of each game. The authors found that their model performed better than the standard win probability models, with a success rate of \%55 percent---above the aforementioned threshold for breaking even in Vegas. We draw heavily upon the methodology used by Sinha et al. in assembling out dataset, modeling our relevance classifier off much of what they express in their paper.  
+
+However, what is absent in the Sinha et al. paper is at the crux of our analysis: measuring Twitter sentiment in real time. To do this, we draw on results from Zhao et al. (2012). In this paper, the authors use Twitter to identify significant plays in real time (with intervals on the order of 1-2 minutes), a substantial improvement over previous approaches that required access to full dataset. Their identification procedure did not rely on sentiment classification, but rather on Tweet rates from specific users and grouping Tweets based on whether they were most likely to have been sent by humans or machines. This piece of previous work provides evidence that Tweets respond in real time to progress in sporting events, informing our hypothesis that Tweets can be predictive and responsive to real time events. 
 
 % Literature Review
 \section{Data Overview}
@@ -574,6 +561,10 @@ American Free Press. ``Global Sports Gambling worth 'up to \$3 Trillion'" Mail O
 
 Davis, Owen. ``March Madness 2015: Getting To The NCAA Finals Costs A Lot, But The 	Rewards For Most Are Slim." International Business Times. N.p., 18 Mar. 2015. 	Web. 01 May 2016.
 
+Go, Alec, Richa Bhayani, and Lei Huang. ``Feature Extraction for Sentiment Classification 	on Twitter Data." IJSR International Journal of Science and Research (IJSR) 5.2 	(2009): 2183-189. Stanford University. Web. 1 May 2016.
+
+Ibrahim, Mohd Naim Mohd, and Mohd Zaliman Mohd Yusoff. ``Twitter Sentiment 		Classification Using Naive Bayes Based on Trainer Perception." 2015 IEEE 		Conference on E-Learning, E-Management and E-Services (IC3e) (2015): n. pag. 	Web.
+
 Kreutz, Liz, Video Ali Dukakis, and Tom Thornton. ``In Las Vegas, No Bets on Hillary 	Clinton (Literally)." ABC News. ABC News Network, 9 May 2015. Web. 01 May 		2016.
 
 Ota, Kevin.``ESPN Tournament Challenge: 13 Million Brackets Set New All-Time Record - 	ESPN MediaZone." ESPN MediaZone. N.p., 17 Mar. 2016. Web. 01 May 2016.
@@ -584,11 +575,15 @@ Silver, Nate, and Jay Bruce. ``How FiveThirtyEight Is Forecasting The 2016 NCAA 
 
 Sinya, Shiladitya, Chris Dyer, Kevin Gimpel, and Noah Smith. ``Predicting the NFL Using 	Twitter." Proceedings of the Workshop on Machine Learning and Data Mining for 	Sports Analytics. (2013): n. pag. Print.
 
+S. J. K. and R. S. E., ``Relevance weighting of search," Journal of the American 		Society for Information Science, vol. 27, no. 3, pp. 129-146, 1976. 
+
 ``Sports Betting Math." The Sports Geek. N.p., n.d. Web. 01 May 2016.
 
 Stossel, John. ``Prediction Markets More Accurate than Polls." WND. N.p., 05 Jan. 		2016. Web. 01 May 2016.
 
 Zhao, Siqi, Lin Zhong, Jehan Wickramasuriya, Venu Vasudevan, Robert LiKamWa, and 	Ahmad Ahmad Rahmati.``SportSense: Real-Time Detection of NFL Game Events 	from Twitter." Technical Report (2012): n. pag. Print.
+
+Yu, C. and Salton, G., ``Precision Weighting?An Effective Automatic Indexing Method," 	Journal of the ACM (JACM), vol. 23, no. 1, pp. 76-88, 1976. 
 
 \newpage
 
