@@ -7,7 +7,7 @@
 \contentsline {subsection}{\numberline {4.1}Twitter's Ability to Process Prior Events}{14}
 \contentsline {subsection}{\numberline {4.2}Twitter's Ability To Predict Near-Term Events}{16}
 \contentsline {subsection}{\numberline {4.3}Twitter's Ability To Predict Game-End Winners}{18}
-\contentsline {section}{\numberline {5}Discussion}{22}
-\contentsline {section}{\numberline {6}Tables and Figures}{22}
-\contentsline {section}{\numberline {7}Bibliography}{29}
-\contentsline {section}{\numberline {8}Appendices}{30}
+\contentsline {section}{\numberline {5}Discussion}{21}
+\contentsline {section}{\numberline {6}Tables and Figures}{25}
+\contentsline {section}{\numberline {7}Bibliography}{32}
+\contentsline {section}{\numberline {8}Appendices}{33}
