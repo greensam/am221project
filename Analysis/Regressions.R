@@ -93,6 +93,30 @@ summary(fitTwitter)
 nmins <- 40
 firstHalfData <- sgdf_data0430[sgdf_data0430$Min_End < 3*nmins/2, ]
 
+# Standard model
+resids = rep(NA, 40)
+for (i in 5:40){
+  subst = sgdf_data0430[sgdf_data0430$Min_End == i, ]
+  glm.out = glm(Winner ~ Vegas_Line + Margin_TOT, family=binomial(logit), data=subst)
+  coef(summary(glm.out))
+  resids[i] = mean(resid(glm.out))
+  ps[i] <- p 
+}
+plot(1:length(resids), resids)
+
+# vegas line, total margin, sent difference
+residSent = rep(NA, 40)
+for (i in 5:40){
+  subst = sgdf_data0430[sgdf_data0430$Min_End == i, ]
+  glm.out = glm(Winner ~ Vegas_Line + Margin_TOT + SentDiff_Total, family=binomial(logit), data=subst)
+  coef(summary(glm.out))
+  residSent[i] = mean(resid(glm.out))
+  ps[i] <- p 
+}
+points(1:length(residSent), residSent, pch=2)
+
+plot(residSent - resids, type='l')
+
 library(ggplot2)
 # Logistic Regressions of Winner
 ps = rep(NA, 40)
