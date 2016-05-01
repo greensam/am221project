@@ -91,10 +91,29 @@ summary(fitTwitter)
 
 # Winner Prediction Model
 nmins <- 40
-firstHalfData <- sgdf_data0430[sgdf_data0430$Min_End < nmins/2, ]
+firstHalfData <- sgdf_data0430[sgdf_data0430$Min_End < 3*nmins/2, ]
 
-# Logistic Regression of Winner
-glm.out = glm(Winner ~ Age, family=binomial(logit), data=menarche)
+library(ggplot2)
+# Logistic Regressions of Winner
+ps = rep(NA, 40)
+for (i in 5:40){
+  subst = sgdf_data0430[sgdf_data0430$Min_End < i, ]
+  glm.out = glm(Winner ~ TwitterDiff + QualityDiff + SentDiff_Period + Margin_TOT, family=binomial(logit), data=subst)
+  coef(summary(glm.out))
+  p = coef(summary(glm.out))[4,4]
+  ps[i] <- p 
+}
+plot(1:length(ps), ps)
+
+ps = rep(NA, 40)
+for (i in 5:40){
+  subst = sgdf_data0430[sgdf_data0430$Min_End < i, ]
+  glm.out = glm(Winner ~ TwitterDiff + QualityDiff + SentDiff_Period + Margin_TOT, family=binomial(logit), data=subst)
+  coef(summary(glm.out))
+  p = coef(summary(glm.out))[4,4]
+  ps[i] <- p 
+}
+
 
 
 
