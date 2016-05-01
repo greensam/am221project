@@ -44,7 +44,7 @@
         Modeling Real-Time Win Probabilities With Twitter\\
         \large
         \vspace{1cm}
-        David Freed and Samuel Green\\ \vspace{0cm}
+        David Freed and Samuel Green\footnote{We thank Yaron Singer, Thibaut Horel, Lior Seeman, and Rajko Radovanovic for their sage advice and constant support throughout the process of taking the class and writing this paper.} \\ \vspace{0cm}
         Applied Mathematics 221 \\
         April 30, 2016 \\
        \end{center}
@@ -79,11 +79,11 @@ The practice of aggregating independent opinions into a collective prediction is
 % Introduction
 \section{Introduction}
 
-The wisdom of the crowds is not a new phenomenon. Economists treat the collective opinion of independent rational agents as sacrosanct; efficient market hypotheses are, at their core, expressing a fundamental belief in the wisdom of the crowds. Statisticians can explain the idea as the reduction of systemic risk---the variance of the sum of $n$ independent and identically distributed random variables is smaller than the variance of any individual r.v. by a factor of $\frac{1}{n}$. In politics, prediction markets have quickly become a better predictor of election results than polls or the opinions of the experts\footnote{http://www.wnd.com/2016/01/prediction-markets-more-accurate-than-polls}.
+The wisdom of the crowds is not a new phenomenon. Economists treat the collective opinion of independent rational agents as sacrosanct; efficient market hypotheses are, at their core, expressing a fundamental belief in the wisdom of the crowds. Statisticians can explain the idea as the reduction of systemic risk---the variance of the sum of $n$ independent and identically distributed random variables is smaller than the variance of any individual r.v. by a factor of $\frac{1}{n}$. In politics, prediction markets have quickly become a better predictor of election results than polls or the opinions of the expert.
 
-The last example evidences the importance of being able to properly assess the wisdom of the crowds. While betting on political elections is illegal in the United States, the number of bets on the current presidential race is up fourfold since 2012 in Ireland.\footnote{http://abcnews.go.com/Politics/las-vegas-bets-hillary-clinton-literally/story?id=30897911} Betfair, the largest online betting exchange for U.S. presidential elections, has nearly one million users and records nearly seven million transactions a day, which it claims is ``more than all European stock exchanges combined''.\footnote{http://corporate.betfair.com/about-us/betfair-facts.aspx} In this cutthroat industry, any edge a gambler can get matters. 
+The last example evidences the importance of being able to properly assess the wisdom of the crowds. While betting on political elections is illegal in the United States, the number of bets on the current presidential race is up fourfold since 2012 in Ireland. Betfair, the largest online betting exchange for U.S. presidential elections, has nearly one million users and records nearly seven million transactions a day, which it claims is ``more than all European stock exchanges combined''. In this cutthroat industry, any edge a gambler can get matters. 
 
-The betting market on politics pales next to the worldwide sports betting market---a colossal enterprise whose size experts ballpark at around \$1 trillion dollars a year. In a market with roughly the GDP of Indonesia, understanding the underlying statistics (in this case, the relative quality of the teams) is fundamental. Any bettor who can consistently outperform the crowds can turn a predictable profit; one has to win only 52.4 percent of his bets to break even in Vegas. 
+The betting market on politics pales next to the worldwide sports betting market---a colossal enterprise whose size experts ballpark at around \$3 trillion dollars a year. In a market with roughly the GDP of the United Kingdom, understanding the underlying statistics (in this case, the relative quality of the teams) is fundamental. Any bettor who can consistently outperform the crowds can turn a predictable profit; one has to win only 52.4 percent of his bets to break even in Vegas. 
 
 In our paper, we tackle the common questions about the wisdom of the crowds from a different angle: instead of asking whether crowds or experts, alone or in aggregate, can predict games before they happen, we look at their ability to understand and predict games that are ongoing. We consider Twitter data from 43 games in the National Collegiate Athletic Association (henceforth, ``NCAA'') Men's Basketball Tournament (henceforth, ``March Madness'') to identify metrics that gauge the level of interest and the sentiment of the crowd at any point in time. 
 
@@ -115,7 +115,7 @@ different varieties of users, the system could
 identify events in near real-time. The event detection
 system leveraged pre-selected sets of hashtags
 to isolate relevant tweets as input to the system. (Zhao et al, 
-2012)\footnote{http://arxiv.org/pdf/1205.3212v1.pdf}. 
+2012). 
 
 Sentiment analysis has also been previously applied
 to Twitter data to a predictive model for NFL games. 
@@ -125,7 +125,7 @@ to predict the outcomes of games more successfully than
 methods using other traditional statistical models. Their
 work used a dataset of tweets collected over periods 
 in advance of games and also collected tweets by 
-building sets of hashtags related to participant teams (Sinha et al., 2013).\footnote{https://www.cs.cmu.edu/~nasmith/papers/sinha+dyer+gimpel+smith.mlsa13.pdf}
+building sets of hashtags related to participant teams (Sinha et al., 2013).
 
 % Literature Review
 \section{Data Overview}
@@ -138,7 +138,7 @@ March Madness, the largest single-elimination tournament in major American sport
 
 We chose to look at March Madness game data because of the level of excitement surrounding the event. Unlike other sports that share the same athletic calendar---most prominently, the National Basketball Association (henceforth, ``NBA'')---there are rarely more than two March Madness games occurring at once and so the entire focus is on the current game. 
 
-The level of interest surrounding an average March Madness game is much higher than that for a regular season mid-week NBA contest; the tournament encourages fans, regardless of their level of expertise, to fill out a bracket predicting the outcome. This cultural phenomenon has exploded in recent years, with ESPN receiving 13 million brackets this year. From the brackets arises an intense gambling market (more than \$9 billion in 2016), raising interest and attention in the games. 
+The level of interest surrounding an average March Madness game is much higher than that for a regular season mid-week NBA contest; the tournament encourages fans, regardless of their level of expertise, to fill out a bracket predicting the outcome. This cultural phenomenon has exploded in recent years, with ESPN receiving 13 million brackets this year. From the brackets arises an intense gambling market (more than \$9 billion in 2015), raising interest and attention in the games. 
 
 %% Image 1: Basic Result From Box Score Scraper
 \begin{figure} [H]
@@ -169,7 +169,7 @@ In order to detect which Tweets were relevant, we only pulled Tweets that had a 
 
 Figure 2 above demonstrates the set of hashtags used for the UVA-Syracuse game. Hashtags in black are hashtags that were not related to either team and common to all sets of tags.\footnote{With the caveat that the final Tweet, "\#SyracusevsVirginia", was altered in each case to refer only to the teams playing in the game.} The other hashtags were taken directly from the official Twitter accounts of the two schools and are colored in relation to which school they refer to. 
 
-To get a sufficient cross-section of data, we took Tweets corresponding to 43 separate games. Fifty-four of the 68 teams participated in at least one game in our dataset. All in all, we collected over 1 million Tweets, with an average of roughly 21,000 Tweets per game. 
+To get a sufficient cross-section of data, we took Tweets corresponding to 43 separate games. Forty-eight of the 68 teams participated in at least one game in our dataset. All in all, we collected over 1 million Tweets, with an average of roughly 21,000 Tweets per game. 
 
 %% Image 3: Number of Tweets as a Histogram
 \begin{figure} [H]
@@ -285,7 +285,27 @@ These results provide more substantial evidence for what we had inferred before:
 % Conclusion
 \section{Discussion}
 
+Our work expands on previous work applying Twitter for predictive sports analysis to demonstrates the predictive power of relevant Twitter data in forecasting both short-term and long-term outcomes in NCAA March Madness games. We begin by providing evidence that, over short time periods, Twitter is responsive to game events; we demonstrate in a prior section that the volume of Tweets (and the sentiment of those Tweets) about a particular team will increase in proportion to the squad's quality of play in prior periods.
 
+Next, we show that Twitter is not only a reactive mechanism, but a useful forecasting tool. In Section 4.2, we show that the volume and sentiment of Tweets in a given period is a statistically significant predictor of game events in the next period. We moved beyond this to demonstrate that Twitter data has significant predictive power in forecasting the eventual winner of the game. Our model that incorporated Twitter sentiment outperformed the standard FiveThirtyEight model at every point in the game. These results support previous work demonstrating ``wisdom of the crowds'' effects on Twitter and show that Twitter analytics can be usefully applied to the NCAA. 
+
+Our results are significant, but carry some caveats and areas of potential development. The foremost point for improvement sits at the pivot point of this study: sentiment classification. We trained our classifier using a corpus of labelled tweets related to Apple and Google product launches, given the impracticality of hand-constructing or commissioning a labelled training set for the sports-specific domain. 
+
+While hand tests showed that our classifier was able to discern conventionally positive language from conventionally negative language, this is inherently inadequate for the sports-specific domain. As mentioned earlier, many words that are conventionally negative, like ``dirty'' or ``filthy,'' are often positive in the context of basketball. Our classifier initially classified the Tweet ``\texttt{Hell yes, Syracuse is going to the Final Four}'' as a `negative' Tweet, but it is evident by inspection that the author is elated at the prospect of Syracuse advanced to the semifinals of the tournament. We hypothesize that were we to re-train the model with a better training set, our model would do a better job of extracting sentiments from Tweets. This would give a better idea of the current opinion of the crowd and provide a good check on our current analysis. We consider this to be a promising avenue for future work.
+
+The second primary caveat to our analysis is the effectiveness of our relevance classifier. The process of separating noisy and relevant Tweets remains a challenge; our initial pull from Twitter contained 27,000 Tweets about GOP presidential candidate and international celebrity Donald Trump. Many of the hashtags that are commonly associated with teams (e.g. \texttt{\#Maryland} or \texttt{\#Wisconsin}) have many other uses. We did our best to eliminate these tweets, as previously discussed, but finding a mechanism to collect a more targeted set for classification would likely also contribute to improvement.\footnote{One related issue that we had is that many Tweets would show up multiple times in our dataset because they had been `reTweeted', a Twitter functionality that allows users to send another account's Tweet from their own account. We opined that any individual who chose to `reTweet' a message shared the sentiment of the original author of the Tweet.} 
+
+The third caveat to the analysis is the way in which we projected game events onto real time. There was no available source of data which provided a reliable timestamp for each event, and our modified uniform approximation of real time is not a perfect mapping. A possible extension or refinement of this process would be to institute many more check points in the data (by tapping Tweets that contained the time left in the game and using those as time signposts) to get a better approximation. Through spot-checking, our approximation appeared to work fairly well, but it remains an important caveat when evaluating our analysis. 
+
+There are two immediate extensions that fall out of the work that we have already done. It would be interesting to consider a more granular separation of the ``crowd'' into trusted and untrusted ``sub-crowds.'' That is, could predictive improvements be made by considering crowd-sourced opinions from known experts, like commentators or individuals prominent in the network, separate from or more heavily weighted than standard or low influence individuals? Presumably, experts are ex ante more qualified to predict outcomes based on game progress but it is not immediately apparent that has to be the case.
+
+The second obvious extension would have been to conduct a systematic study of Twitter's ability to incorporate specific types of unobservable information. Earlier in the paper, we reference the cases of a star player getting injured mid-game or coming out of the game with a fourth foul as situations where the margin may not accurately reflect a swing in the game. If we had an expanded dataset, we could take advantage of Twitter's ability to detect momentum to conduct a more thorough event study on this basis. 
+
+The final trivial extension would be to apply this to other leagues and sports. The National Basketball Association (henceforth, ``NBA'') would be a logical extension. One other interesting extension would be to gauge the predictive power for Twitter in smaller markets---how many people need to be following the game closely for their aggregate opinion to become predictive? Given the vast difference in attendance between games in the Big 12 and the Ivy League athletic conferences, this poses an interesting question for practitioners, who can often win substantial sums in less liquid markets (e.g. Ivy League athletics gambling).    
+
+In sum, the results presented above are a novel extension of previous work. We distinguish ourselves from the previous literature on this subject by measuring the sentiment of Twitter, not only the volume, at any point in time. Our results about the predictive power of models that incorporate Twitter data provide the basis for improved in-game win probability models and provoke interesting questions about how to measure unobservable information. 
+
+To our knowledge, the results presented here are novel. We provide the first models using Twitter data as input to a real-time model. We are also the first to show that a model of this variety has power when predicting future events and full game outcomes in the NCAA. Above, we note a series of logical extensions to the work, which can extend the analysis above and continue digging into the interesting empirical questions raised by the paper. 
 
 % Tables and Figures
 \section{Tables and Figures}
@@ -547,6 +567,28 @@ Akaike Inf. Crit. & 1,194.606 & 1,188.730 & 1,190.097 & 1,184.873 \\
 
 % Bibliography
 \section{Bibliography}
+
+American Free Press. ``Global Sports Gambling worth 'up to \$3 Trillion'" Mail Online. 	Associated Newspapers, 15 Apr. 2015. Web. 01 May 2016.
+
+``Betfair Facts." Betfair. N.p., n.d. Web. 01 May 2016.
+
+Davis, Owen. ``March Madness 2015: Getting To The NCAA Finals Costs A Lot, But The 	Rewards For Most Are Slim." International Business Times. N.p., 18 Mar. 2015. 	Web. 01 May 2016.
+
+Kreutz, Liz, Video Ali Dukakis, and Tom Thornton. ``In Las Vegas, No Bets on Hillary 	Clinton (Literally)." ABC News. ABC News Network, 9 May 2015. Web. 01 May 		2016.
+
+Ota, Kevin.``ESPN Tournament Challenge: 13 Million Brackets Set New All-Time Record - 	ESPN MediaZone." ESPN MediaZone. N.p., 17 Mar. 2016. Web. 01 May 2016.
+
+``Report for Selected Countries and Subjects." International Monetary Fund. N.p., 1 Oct. 	2015. Web. 01 May 2016.
+
+Silver, Nate, and Jay Bruce. ``How FiveThirtyEight Is Forecasting The 2016 NCAA 		Tournament." FiveThirtyEight. ESPN, 13 Mar. 2016. Web. 1 May 2016.
+
+Sinya, Shiladitya, Chris Dyer, Kevin Gimpel, and Noah Smith. ``Predicting the NFL Using 	Twitter." Proceedings of the Workshop on Machine Learning and Data Mining for 	Sports Analytics. (2013): n. pag. Print.
+
+``Sports Betting Math." The Sports Geek. N.p., n.d. Web. 01 May 2016.
+
+Stossel, John. ``Prediction Markets More Accurate than Polls." WND. N.p., 05 Jan. 		2016. Web. 01 May 2016.
+
+Zhao, Siqi, Lin Zhong, Jehan Wickramasuriya, Venu Vasudevan, Robert LiKamWa, and 	Ahmad Ahmad Rahmati.``SportSense: Real-Time Detection of NFL Game Events 	from Twitter." Technical Report (2012): n. pag. Print.
 
 \newpage
 
