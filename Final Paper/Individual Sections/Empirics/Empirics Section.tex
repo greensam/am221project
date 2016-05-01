@@ -1,0 +1,303 @@
+\documentclass[12pt]{article}
+\usepackage[hmargin=1in,vmargin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{sectsty}
+\usepackage{fancyvrb}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage[flushleft]{threeparttable}
+
+% Make all of the environments for different proof elements
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newenvironment{proof}[1][Proof:]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\usepackage{hyperref}
+\usepackage[usenames, dvipsnames]{color}
+
+\definecolor{cuse}{RGB}{212, 69, 0}
+\definecolor{uva}{RGB}{0, 55, 119}
+
+% Change back to use Arabic footnotes
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+\sectionfont{\large}
+\subsectionfont{\normalsize}
+
+% Start the document
+\begin{document}
+\setcounter{page}{1}
+\begin{doublespacing}
+
+\title{Draft Empirics Section}
+\author{David Freed and Samuel Green}
+\date{April 30, 2016}
+\maketitle
+
+\section*{Regression Tables}
+
+%% Table 1: How Twitter Responds to Changes in Margin (Sentiment)
+\begin{table}[H] 
+\centering 
+\caption{Twitter Responsiveness to Game Events (pt. 1)} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccc} 
+\hline 
+\hline
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-3.0ex] & \multicolumn{3}{c}{SentDiff\_Period} \\ 
+\\[-1.5ex] & (1) & (2) & (3)\\ 
+\hline
+ Margin\_Period\_Lag1 & 0.891$^{**}$ & 0.881$^{**}$ & 0.910$^{**}$ \\ 
+  & (0.367) & (0.366) & (0.370) \\ 
+ Margin\_Period\_Lag2 &  &  & 0.864$^{**}$ \\ 
+  &  &  & (0.377) \\ 
+ Vegas\_Line &  & $-$1.008$^{***}$ & $-$0.973$^{***}$ \\ 
+  &  & (0.231) & (0.237) \\ 
+ QualityDiff &  & 35.390$^{***}$ & 32.811$^{***}$ \\ 
+  &  & (10.041) & (10.304) \\ 
+ TwitterDiff &  & $-$0.004 & $-$0.006 \\ 
+  &  & (0.011) & (0.011) \\ 
+ Min\_End &  & 0.068 & 0.061 \\ 
+  &  & (0.075) & (0.079) \\ 
+\hline \\[-1.8ex] 
+Observations & 1,306 & 1,306 & 1,266 \\ 
+R$^{2}$ & 0.005 & 0.021 & 0.023 \\ 
+Adjusted R$^{2}$ & 0.004 & 0.017 & 0.018 \\ 
+Residual Std. Error & 30.443 & 30.238 & 30.562 \\ 
+F Statistic & 5.897$^{**}$ & 5.548$^{***}$ & 4.972$^{***}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
+
+%% Table 2: How Twitter Responds to Changes in Margin (Volume)
+\begin{table}[H] 
+\centering 
+\caption{Twitter Responsiveness to Game Events (pt. 2)} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccc} 
+\hline 
+\hline
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-3.0ex] & \multicolumn{3}{c}{VolDiff\_Period} \\ 
+\\[-1.5ex] & (1) & (2) & (3)\\ 
+\hline
+ Margin\_Period\_Lag1 & 6.253$^{***}$ & 5.877$^{***}$ & 6.028$^{***}$ \\ 
+  & (1.259) & (1.237) & (1.246) \\ 
+ Margin\_Period\_Lag2 &  &  & 4.779$^{***}$ \\ 
+  &  &  & (1.268) \\ 
+ Vegas\_Line &  & $-$1.454$^{*}$ & $-$1.416$^{*}$ \\ 
+  &  & (0.781) & (0.797) \\ 
+ QualityDiff &  & 129.964$^{***}$ & 122.143$^{***}$ \\ 
+  &  & (33.914) & (34.662) \\ 
+ TwitterDiff &  & 0.165$^{***}$ & 0.168$^{***}$ \\ 
+  &  & (0.036) & (0.037) \\ 
+ Min\_End &  & $-$0.630$^{**}$ & $-$0.679$^{**}$ \\ 
+  &  & (0.253) & (0.267) \\ 
+\hline \\[-1.8ex] 
+Observations & 1,306 & 1,306 & 1,266 \\ 
+R$^{2}$ & 0.019 & 0.063 & 0.073 \\ 
+Adjusted R$^{2}$ & 0.018 & 0.060 & 0.069 \\ 
+Residual Std. Error & 104.377 & 102.132 & 102.812 \\ 
+F Statistic & 24.685$^{***}$  & 17.550$^{***}$ & 16.599$^{***}$ \\
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
+
+%% Table 3: Twitter Sensitivity to Game Events During Closing Minutes
+\begin{table}[H] 
+\centering 
+\caption{Twitter Responsiveness to Game Events (Closing Minutes)} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc} 
+\hline 
+\hline
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-3.0ex] & \multicolumn{2}{c}{SentDiff\_Period} & \multicolumn{2}{c}{VolDiff\_Period} \\ 
+\\[-1.5ex] & (1) & (2) & (3) & (4)\\ 
+\hline
+ Margin\_Period & 3.080$^{***}$ &  & 9.598$^{***}$ &  \\ 
+  & (0.898) &  & (2.980) &  \\ 
+ Margin\_Period\_Lag1 &  & 1.325 &  & 7.570$^{**}$ \\ 
+  &  & (0.934) &  & (3.071) \\ 
+ Vegas\_Line & $-$1.691$^{***}$ & $-$1.802$^{***}$ & 1.061 & 0.671 \\ 
+  & (0.585) & (0.594) & (1.941) & (1.953) \\ 
+ QualityDiff & 54.306$^{**}$ & 61.013$^{**}$ & 44.282 & 60.681 \\ 
+  & (25.706) & (26.013) & (85.282) & (85.559) \\ 
+ TwitterDiff & $-$0.012 & $-$0.012 & 0.451$^{***}$ & 0.447$^{***}$ \\ 
+  & (0.028) & (0.028) & (0.092) & (0.092) \\ 
+ Min\_End & $-$0.526 & $-$0.719 & $-$2.755 & $-$3.466 \\ 
+  & (0.740) & (0.751) & (2.455) & (2.470) \\ 
+\hline \\[-1.8ex] 
+Observations & 316 & 316 & 316 & 316 \\ 
+R$^{2}$ & 0.068 & 0.039 & 0.133 & 0.121 \\ 
+Adjusted R$^{2}$ & 0.053 & 0.024 & 0.119 & 0.107 \\ 
+Residual Std. Error & 37.840 & 38.427 & 125.537 & 126.387 \\ 
+F Statistic & 4.535$^{***}$ & 2.520$^{**}$ & 9.490$^{***}$ & 8.531$^{***}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
+
+%% Table 4: Can Twitter Sentiment Predict Future Margins
+\begin{table}[H] 
+\centering 
+\caption{The Accuracy of the Crowds (pt. 1)} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccc} 
+\hline 
+\hline
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-3.0ex] & \multicolumn{3}{c}{Margin\_Period} \\ 
+\\[-1.5ex] & (1) & (2) & (3)\\ 
+\hline
+ SentDiff\_Period\_Lag1 & 0.006$^{***}$ & 0.006$^{***}$ & 0.006$^{***}$ \\ 
+  & (0.002) & (0.002) & (0.002) \\ 
+ SentDiff\_Period\_Lag2 &  &  & 0.001 \\ 
+  &  &  & (0.003) \\ 
+ SentDiff\_Period\_Lag3 &  &  & $-$0.003 \\ 
+  &  &  & (0.002) \\ 
+ Vegas\_Line &  & 0.009 & 0.003 \\ 
+  &  & (0.018) & (0.019) \\ 
+ QualityDiff &  & 0.983 & 1.239 \\ 
+  &  & (0.780) & (0.809) \\ 
+ TwitterDiff &  & 0.0003 & 0.0002 \\ 
+  &  & (0.001) & (0.001) \\ 
+ Min\_End &  & 0.004 & 0.007 \\ 
+  &  & (0.006) & (0.006) \\ 
+\hline \\[-1.8ex] 
+Observations & 1,306 & 1,306 & 1,226 \\ 
+R$^{2}$ & 0.006 & 0.012 & 0.015 \\ 
+Adjusted R$^{2}$ & 0.005 & 0.008 & 0.009 \\ 
+Residual Std. Error & 2.342 & 2.338 & 2.344 \\ 
+F Statistic & 7.250$^{***}$ & 3.106$^{***}$ & 2.638$^{**}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
+
+%% Table 5:
+\begin{table}[H] 
+\centering 
+\caption{The Accuracy of the Crowds (pt. 2)} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc} 
+\hline 
+\hline
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-3.0ex] & \multicolumn{4}{c}{Margin\_Period} \\ 
+\\[-1.5ex] & (1) & (2) & (3) & (4)\\ 
+\hline
+  VolDiff\_Period\_Lag1 & 0.002$^{***}$ & 0.002$^{***}$ & 0.002$^{**}$ & 0.003$^{***}$ \\ 
+  & (0.001) & (0.001) & (0.001) & (0.001) \\ 
+ SentDiff\_Period\_Lag1 &  &  & 0.004 &  \\ 
+  &  &  & (0.002) &  \\ 
+ VolDiff\_Period\_Lag2 &  &  &  & 0.0004 \\ 
+  &  &  &  & (0.001) \\ 
+ VolDiff\_Period\_Lag3 &  &  &  & $-$0.002$^{**}$ \\ 
+  &  &  &  & (0.001) \\ 
+ Vegas\_Line &  & 0.006 & 0.009 & 0.0004 \\ 
+  &  & (0.018) & (0.018) & (0.018) \\ 
+ QualityDiff &  & 0.902 & 0.837 & 1.224 \\ 
+  &  & (0.780) & (0.781) & (0.806) \\ 
+ TwitterDiff &  & $-$0.00003 & 0.0001 & 0.00005 \\ 
+  &  & (0.001) & (0.001) & (0.001) \\ 
+ Min\_End &  & 0.005 & 0.005 & 0.008 \\ 
+  &  & (0.006) & (0.006) & (0.006) \\ 
+\hline \\[-1.8ex] 
+Observations & 1,306 & 1,306 & 1,306 & 1,226 \\ 
+R$^{2}$ & 0.009 & 0.014 & 0.016 & 0.021 \\ 
+Adjusted R$^{2}$ & 0.008 & 0.010 & 0.011 & 0.015 \\ 
+Residual Std. Error & 2.338 & 2.335 & 2.334 & 2.337 \\ 
+F Statistic & 11.852$^{***}$ & 3.686$^{***}$ & 3.435$^{***}$ & 3.675$^{***}$  \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
+
+%% Table 6: Reversion to the Mean
+\begin{table}[H] 
+\centering 
+\caption{Reversion to the Mean} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc} 
+\hline 
+\hline
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-3.0ex] & \multicolumn{4}{c}{Margin\_Period} \\ 
+\\[-1.5ex] & (1) & (2) & (3) & (4)\\ 
+\hline
+ Margin\_TOT\_Lag1 & $-$0.018$^{**}$ &  &  &  \\ 
+  & (0.008) &  &  &  \\ 
+ SentDiff\_Total\_Lag1 &  & 0.0005 &  & 0.0005 \\ 
+  &  & (0.0004) &  & (0.0004) \\ 
+ VolDiff\_Total\_Lag1 &  &  & 0.00001 & 0.00001 \\ 
+  &  &  & (0.0001) & (0.0001) \\ 
+ Vegas\_Line & 0.005 & 0.010 & 0.004 & 0.010 \\ 
+  & (0.018) & (0.019) & (0.018) & (0.019) \\ 
+ QualityDiff & 1.679$^{**}$ & 0.934 & 1.172 & 0.915 \\ 
+  & (0.802) & (0.804) & (0.786) & (0.812) \\ 
+ TwitterDiff & 0.0004 & 0.0003 & 0.0002 & 0.0003 \\ 
+  & (0.001) & (0.001) & (0.001) & (0.001) \\ 
+ Min\_End & 0.002 & 0.004 & 0.005 & 0.005 \\ 
+  & (0.006) & (0.006) & (0.006) & (0.006) \\ 
+\hline \\[-1.8ex] 
+Observations & 1,306 & 1,306 & 1,306 & 1,306 \\ 
+R$^{2}$ & 0.011 & 0.008 & 0.006 & 0.008 \\ 
+Adjusted R$^{2}$ & 0.007 & 0.004 & 0.003 & 0.003 \\ 
+Residual Std. Error & 2.339 & 2.343 & 2.344 & 2.344 \\ 
+F Statistic & 2.865$^{**}$ & 2.009$^{*}$ & 1.698 & 1.678 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
+
+%% Table 7: Generalized Linear Model
+\begin{table}[H] 
+\centering 
+\caption{Generalized Linear Model} 
+\label{} 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcccc} 
+\hline 
+\hline
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-3.0ex] & \multicolumn{4}{c}{Winner} \\ 
+\\[-1.5ex] & (1) & (2) & (3) & (4)\\ 
+\hline
+ Vegas\_Line & $-$0.041$^{***}$ & $-$0.034$^{**}$ & $-$0.044$^{***}$ & $-$0.038$^{***}$ \\ 
+  & (0.014) & (0.014) & (0.014) & (0.014) \\ 
+ Margin\_TOT & 0.173$^{***}$ & 0.166$^{***}$ & 0.168$^{***}$ & 0.160$^{***}$ \\ 
+  & (0.012) & (0.012) & (0.012) & (0.012) \\ 
+ SentDiff\_Total &  & 0.001$^{***}$ &  & 0.001$^{***}$ \\ 
+  &  & (0.0005) &  & (0.001) \\ 
+ VolDiff\_Total &  &  & 0.0002$^{**}$ & 0.0002$^{**}$ \\ 
+  &  &  & (0.0001) & (0.0001) \\ 
+ Constant & $-$1.067$^{***}$ & $-$1.043$^{***}$ & $-$1.074$^{***}$ & $-$1.056$^{***}$ \\ 
+  & (0.109) & (0.112) & (0.112) & (0.114) \\ 
+\hline \\[-1.8ex] 
+Observations & 1,346 & 1,346 & 1,346 & 1,346 \\ 
+Log Likelihood & $-$594.303 & $-$590.365 & $-$591.049 & $-$587.436 \\ 
+Akaike Inf. Crit. & 1,194.606 & 1,188.730 & 1,190.097 & 1,184.873 \\
+\hline 
+\hline \\[-1.8ex] 
+\end{tabular*} 
+\end{table} 
+
+\end{doublespacing}
+\end{document}
