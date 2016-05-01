@@ -5,7 +5,7 @@
 library(stargazer)
 
 # bring in the data
-sgdf_data0430 = read.csv("tweetdata.csv", header=TRUE)
+sgdf_data0430 = read.csv("~/Dropbox/School/Harvard 15-16/Applied Mathematics 221/Final Project/am221project/Analysis/tweetdata.csv", header=TRUE)
 
 ##################################################
 ##################################################
@@ -28,11 +28,13 @@ fitSentMargin <- lm(SentDiff_Period~Margin_Period_Lag1, data=sgdf_data0430)
 
 # add standard controls
 # SentDiff_T ~ Margin_T-1 + Controls
-fitSentMarginControls <- lm(SentDiff_Period ~ Margin_Period_Lag1 + Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+fitSentMarginControls <- lm(SentDiff_Period ~ Margin_Period_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
 
 # add a second lag + controls
 # SentDiff_T ~ Margin_T-1 + Margin_T-2 + Controls
-fitSentMarginControls <- lm(SentDiff_Period ~ Margin_Period_Lag2 + Margin_Period_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+fitSentMarginControls2 <- lm(SentDiff_Period ~ Margin_Period_Lag2 + Margin_Period_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+
+stargazer(fitSentMargin, fitSentMarginControls, fitSentMarginControls2)
 
 ###################################################
 
@@ -54,6 +56,8 @@ fitVolMarginControls <- lm(VolDiff_Period ~ Margin_Period_Lag1 +  Vegas_Line + Q
 # add a second lag + controls
 # VolDiff_T ~ Margin_T-1 + Margin_T-2 + Controls
 fitVolMarginMultipleControls <- lm(VolDiff_Period ~ Margin_Period_Lag2 + Margin_Period_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+
+stargazer(fitVolMargin, fitVolMarginControls, fitVolMarginMultipleControls)
 
 ##################################################
 ##################################################
@@ -77,6 +81,8 @@ fitVolMarginControlsSubset <- lm(VolDiff_Period ~ Margin_Period+  Vegas_Line + Q
 # VolDiff_T ~ Margin_T-1 + Controls
 fitVolMarginLagControlsSubset <- lm(VolDiff_Period ~ Margin_Period_Lag1+  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=dataEndOfGame)
 
+stargazer(fitSentMarginControlsSubset, fitSentMarginLagControlsSubset, 
+          fitVolMarginControlsSubset, fitVolMarginLagControlsSubset)
 
 ###################################################
 			# End Regression Family 1 # 
@@ -104,12 +110,13 @@ fitMarginSent <- lm(Margin_Period~SentDiff_Period_Lag1,data= sgdf_data0430)
 
 # margin on senitment with controls
 # Margin_T ~ Sentiment_T-1 + Controls 
-fitMarginSentControls <- lm(Margin_Period_Lag1 ~ SentDiff_Period_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+fitMarginSentControls <- lm(Margin_Period ~ SentDiff_Period_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
 
 # margin on sentiment, multiple lags, with controls
 # Margin_T ~ Sentiment_T-1 + Sentiment_T-2 + Sentiment_T-3 + Controls
-fitMarginSentMultipleControls <- lm(Margin_Period_Lag1 ~ SentDiff_Period_Lag1 + SentDiff_Period_Lag2 + SentDiff_Period_Lag3 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+fitMarginSentMultipleControls <- lm(Margin_Period ~ SentDiff_Period_Lag1 + SentDiff_Period_Lag2 + SentDiff_Period_Lag3 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
 
+stargazer(fitMarginSent, fitMarginSentControls, fitMarginSentMultipleControls)
 
 ##################################################
 ##################################################
@@ -128,14 +135,16 @@ fitMarginVol <- lm(Margin_Period~VolDiff_Period_Lag1,data= sgdf_data0430)
 
 # margin on volume with controls
 # Margin_T ~ Sentiment_T-1 + Controls 
-fitMarginVolControls <- lm(Margin_Period_Lag1 ~ VolDiff_Period_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+fitMarginVolControls <- lm(Margin_Period ~ VolDiff_Period_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
 
 # margin on volume and sentiment with controls
-fitMarginVolSentControls <- lm(Margin_Period_Lag1 ~ VolDiff_Period_Lag1 + SentDiff_Period_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+fitMarginVolSentControls <- lm(Margin_Period ~ VolDiff_Period_Lag1 + SentDiff_Period_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
 
 # margin on volume, multiple lags, with controls
 # Margin_T ~ Volume_T-1 + Volume_T-2 + Volume_T-3 + Controls
-fitMarginVolMultipleControls <- lm(Margin_Period_Lag1 ~ VolDiff_Period_Lag1 + VolDiff_Period_Lag2 + VolDiff_Period_Lag3 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+fitMarginVolMultipleControls <- lm(Margin_Period ~ VolDiff_Period_Lag1 + VolDiff_Period_Lag2 + VolDiff_Period_Lag3 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+
+stargazer(fitMarginVol, fitMarginVolControls, fitMarginVolSentControls, fitMarginVolMultipleControls)
 
 ##################################################
 ##################################################
@@ -150,16 +159,18 @@ fitMarginVolMultipleControls <- lm(Margin_Period_Lag1 ~ VolDiff_Period_Lag1 + Vo
 # Margin_T ~ VolTOT_T-1 + MarginTOT_T-1 + SentTOT_T-1 + Controls
 
 # Margin_T ~ MarginTOT_T-1 + Controls
-fitMarginMarginTot <- lm(Margin_Period~Margin_TOT_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+fitMarginMarginTot <- lm(Margin_Period ~ Margin_TOT_Lag1 + Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
 
 # Margin_T ~ SentTOT_T-1 + Controls
-fitMarginSentTot <- lm(Margin_Period~SentDiff_Total_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+fitMarginSentTot <- lm(Margin_Period ~ Margin_TOT_Lag1 + SentDiff_Total_Lag1 + Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
 
 # Margin_T ~ VolDiffTOT_T-1 + Controls
-fitMarginVolTot <- lm(Margin_Period~VolDiff_Total_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+fitMarginVolTot <- lm(Margin_Period ~ Margin_TOT_Lag1 + VolDiff_Total_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
 
 # # Margin_T ~ VolTOT_T-1 + MarginTOT_T-1 + SentTOT_T-1 + Controls
-fitMarginVolTot <- lm(Margin_Period~SentDiff_Total_Lag1+ VolDiff_Total_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+fitMarginVolTot2 <- lm(Margin_Period ~ Margin_TOT_Lag1 + SentDiff_Total_Lag1 + VolDiff_Total_Lag1 + Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+
+stargazer(fitMarginMarginTot, fitMarginSentTot, fitMarginVolTot, fitMarginVolTot2)
 
 ###################################################
 			# End Regression Family 2 # 
@@ -197,9 +208,15 @@ glm.Volume =  glm(Winner~Vegas_Line + Margin_TOT + VolDiff_Total, family=binomia
 # Indc_Winning ~ Vegas_Line + Margin_T + VolDiff_TOT_T + SentDiff_TOT_T
 glm.VolumeSentiment =  glm(Winner~Vegas_Line + Margin_TOT + VolDiff_Total + SentDiff_Total, family=binomial(logit), data=sgdf_data0430)
 
+stargazer(glm.Standard, glm.Sentiment, glm.Volume, glm.VolumeSentiment)
+
 ###################################################
 			# End Regression Family 3 # 
 ###################################################
+
+
+
+
 
 
 
