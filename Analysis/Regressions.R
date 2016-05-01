@@ -8,7 +8,7 @@ library(leaps)
 library(stargazer)
 
 # Read in the relevant dataset
-sgdf_data0430 = read.csv("tweetdata.csv", header=TRUE)
+sgdf_data0430 = read.csv("~/Dropbox/School/Harvard 15-16/Applied Mathematics 221/Final Project/am221project/Analysis/tweetdata.csv", header=TRUE)
 colnames(sgdf_data0430)
 
 fit1 <- lm(Margin_Period ~ SentDiff_Period + SentDiff_Total +
