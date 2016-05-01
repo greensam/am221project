@@ -36,9 +36,9 @@
 \begin{titlepage}
 \begin{doublespacing}
     \begin{center}
-        \vspace*{1cm}
+        \vspace*{4cm}
         \Large
-        \textbf{Wisdom of the Crowds:}
+        \textbf{The Voice of the Crowd:}
         
         \vspace{0.5cm}
         Modeling Real-Time Win Probabilities With Twitter\\
@@ -50,12 +50,6 @@
        \end{center}
        
        \vspace{3cm}
-       
-       % Abstract
-	\begin{center}
-	    \textbf{Abstract} \\
-	    Past research has considered the ... We ... 
-	\end{center}
 
 \end{doublespacing}
 \end{titlepage}
@@ -64,6 +58,18 @@
 \renewcommand*{\thefootnote}{\arabic{footnote}}
 
 \setcounter{page}{1}
+\newpage
+
+\begin{doublespacing}
+
+% Abstract
+\begin{center}
+	\textbf{Abstract} \\
+\end{center}
+The practice of aggregating independent opinions into a collective prediction is a standard one: the ``wisdom of the crowds'' is touted across multiple disciplines. Our paper applies this concept to sports, providing a novel method of measuring in-game crowd sentiment. We aggregate relevant Tweets sent during 43 NCAA March Madness games and use a sentiment classifier to judge Twitter sentiment towards each team at any point in time. By matching this data to game data, we find that Twitter is both reactive to prior game events and predictive of future ones. We conclude by showing that including Twitter sentiment will improve the predictive power of in-game win probability models, implying that Twitter actors capture information that cannot be gleaned from the box score. 
+
+\end{doublespacing}
+	    
 \newpage
 
 \tableofcontents
@@ -272,10 +278,12 @@ In Figure 8 above, we look at how the standard models measure against logistic r
 
 These results provide more substantial evidence for what we had inferred before: Twitter captures important predictive information that previous models did not. Table 9 shows the results of global regressions that merely confirm the relevance of both Twitter sentiment and volume. In Columns (2), (3), and (4) the two metrics are statistically significant at the 0.01 percent significance level and carry positive coefficients, implying that the higher Twitter is on a team, the more likely they are to eventually come out victorious. 
 
-% Literature Review
+% Conclusion
 \section{Discussion}
 
-% Literature Review
+
+
+% Tables and Figures
 \section{Tables and Figures}
 
 %% Table 1: How Twitter Responds to Changes in Margin (Sentiment)
@@ -534,11 +542,48 @@ Akaike Inf. Crit. & 1,194.606 & 1,188.730 & 1,190.097 & 1,184.873 \\
 
 \newpage
 
-% Literature Review
+% Bibliography
 \section{Bibliography}
 
-% Literature Review
+\newpage
+
+% Final Appendices
 \section{Appendices}
+
+\begin{table}[H] 
+\centering 
+\caption{Official Twitter Accounts For Relevant Teams}  
+\begin{tabular} {c c c c}
+\hline \hline 
+\textbf{Team} & \textbf{Twitter Account} & \textbf{Team} & \textbf{Twitter Account} \\ [0.5ex]  
+Arkansas-Little Rock & \texttt{@LittleRockMBB} & Notre Dame & \texttt{@NDmbb} \\
+Butler & \texttt{@ButlerMBB} & Oklahoma & \texttt{@OU\_MBBall} \\
+Cal State Bakersfield & \texttt{@CSUB\_MBB} & Oregon & \texttt{@OregonMBB} \\
+California & \texttt{@CalMensBBall} & Oregon State & \texttt{@OregonStateMBB} \\
+Cincinnati & \texttt{@GoBearcatsMBB} & Pittsburgh & \texttt{@HailtoPittHoops}  \\
+Connecticut & \texttt{@UConnMBB}  & Providence & \texttt{@PCFriarsmbb} \\
+Dayton & \texttt{@DaytonMBB}  & Saint Joseph's & \texttt{@SJUHawks\_MBB} \\
+Duke & \texttt{@Duke\_MBB}  & South Dakota State & \texttt{@GoJacksMBB}\\ 
+Gonzaga & \texttt{@ZagMBB} & Stephen F. Austin & \texttt{@SFA\_MBB} \\
+Green Bay & \texttt{@gbphoenixmbb} & Syracuse & \texttt{@Cuse\_MBB} \\
+Hawaii & \texttt{@HawaiiMBB} & Temple & \texttt{@TUMBBHoops} \\
+Holy Cross & \texttt{@HCrossMBB} & Texas & \texttt{@TexasMBB} \\
+Indiana & \texttt{@IndianaMBB} & Texas A\&M & \texttt{@AggieMensHoops} \\
+Iowa & \texttt{@IowaHoops} & UNC Asheville & \texttt{@UNCAbasketball} \\
+Iowa State & \texttt{@CycloneMBB} & Utah & \texttt{@Runnin\_Utes} \\
+Kansas & \texttt{@KUHoops} & VCU & \texttt{@VCU\_Hoops} \\
+Kentucky & \texttt{@KentuckyMBB} & Villanova & \texttt{@NovaMBB} \\
+Maryland & \texttt{@TerrapinHoops} & Virginia & \texttt{@UVAMensHoops} \\
+Miami & \texttt{@CanesHoops} & Weber State & \texttt{@WeberStateMBB}\\
+Michigan & \texttt{@umichbball} & West Virginia & \texttt{@WVUhoops} \\
+Michigan State & \texttt{@MSU\_Basketball} & Wichita State & \texttt{@GoShockers} \\
+Middle Tennessee & \texttt{@MT\_MBB} & Wisconsin & \texttt{@BadgerMBB}  \\
+North Carolina & \texttt{@UNC\_Basketball} & Xavier & \texttt{@XavierMBB} \\
+Northern Iowa & \texttt{@UNImbb} & Yale & \texttt{@Yale\_Basketball} \\
+\hline 
+
+\end{tabular}
+\end{table}
 
 \end{doublespacing}
 
