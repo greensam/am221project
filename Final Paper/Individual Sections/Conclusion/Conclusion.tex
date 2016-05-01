@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+\usepackage[hmargin=1in,vmargin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{sectsty}
+\usepackage{fancyvrb}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage[flushleft]{threeparttable}
+
+% Make all of the environments for different proof elements
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newenvironment{proof}[1][Proof:]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\usepackage{hyperref}
+\usepackage[usenames, dvipsnames]{color}
+
+\definecolor{cuse}{RGB}{212, 69, 0}
+\definecolor{uva}{RGB}{0, 55, 119}
+
+% Change back to use Arabic footnotes
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+\sectionfont{\large}
+\subsectionfont{\normalsize}
+
+% Start the document
+\begin{document}
+\setcounter{page}{1}
+\begin{doublespacing}
+
+\title{Draft Conclusion}
+\author{David Freed and Samuel Green}
+\date{May 1, 2016}
+\maketitle
+
+
+\end{doublespacing}
+\end{document}
