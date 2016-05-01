@@ -55,6 +55,29 @@ fitVolMarginControls <- lm(VolDiff_Period ~ Margin_Period_Lag1 +  Vegas_Line + Q
 # VolDiff_T ~ Margin_T-1 + Margin_T-2 + Controls
 fitVolMarginMultipleControls <- lm(VolDiff_Period ~ Margin_Period_Lag2 + Margin_Period_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
 
+##################################################
+##################################################
+# Table 3 Regressions 
+# Test: End of Game Behavior
+##################################################
+##################################################
+
+# subset the data
+dataEndOfGame = sgdf_data0430[sgdf_data0430$Min_End > 30, ]
+
+# SentDiff_T ~ Margin_T + Controls
+fitSentMarginControlsSubset <- lm(SentDiff_Period ~ Margin_Period +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=dataEndOfGame)
+
+# SentDiff_T ~ Margin_T-1 + Controls
+fitSentMarginLagControlsSubset <- lm(SentDiff_Period ~ Margin_Period_Lag1 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=dataEndOfGame)
+
+# VolDiff_T ~ Margin_T + Controls
+fitVolMarginControlsSubset <- lm(VolDiff_Period ~ Margin_Period+  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=dataEndOfGame)
+
+# VolDiff_T ~ Margin_T-1 + Controls
+fitVolMarginLagControlsSubset <- lm(VolDiff_Period ~ Margin_Period_Lag1+  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=dataEndOfGame)
+
+
 ###################################################
 			# End Regression Family 1 # 
 ###################################################
