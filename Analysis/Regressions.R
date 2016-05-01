@@ -19,10 +19,30 @@ summary(fit1)
 fitQ1ai <- lm(Margin_Period~SentDiff_Period_Lag1, data=sgdf_data0430)
 summary(fitQ1ai)
 
-# None of these add significance
-fitQ1aii <- lm(Margin_Period~SentDiff_Period_Lag1 + SentDiff_Period_Lag2, data=sgdf_data0430)
-summary(fitQ1aii)
+# Add Controls
+fitQ1aiControls <- lm(Margin_Period~SentDiff_Period_Lag1 + Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+summary(fitQ1ai)
 
+# Check if adding a second and third lags improves prediction
+fitQ1aiiControls <- lm(Margin_Period~SentDiff_Period_Lag1 + SentDiff_Period_Lag2 + SentDiff_Period_Lag3 + Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
+summary(fitQ1aiiControls)
+
+# Check if Volume is predictive
+fitVolume<- lm(Margin_Period~ VolDiff_Period_Lag1, data=sgdf_data0430)
+summary(fitVolume)
+
+# Check Volume + Controls
+fitVolumeControls <- lm(Margin_Period~VolDiff_Period_Lag1 +Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430 )
+summary(fitVolumeControls)
+
+# check a model with volume and sentiment
+# Margin_T ~ VolDiff_T-1 + VolDiff_T-2 + VolDiff_T-3 + Controls
+fitVolumeandSent <- lm(Margin_Period~SentDiff_Period_Lag1 + VolDiff_Period_Lag1 +Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430 )
+summary(fitVolumeandSent)
+
+
+
+#### 
 fitQ1aiii <- lm(Margin_Period~SentDiff_Period_Lag1 + SentDiff_Period_Lag2 
                 + SentDiff_Period_Lag3, data=sgdf_data0430)
 summary(fitQ1aiii)
@@ -54,8 +74,7 @@ summary(fitQ1d)
 # not prediction 
 
 # Is volume significant on its own?
-fitVolume<- lm(Margin_Period~ VolDiff_Period_Lag1, data=sgdf_data0430)
-summary(fitVolume)
+
 # Answer: yep
 
 # Control for difference in team quality
@@ -81,7 +100,6 @@ fitMarginTotal <- lm(Margin_TOT~Margin_TOT_Lag1, data=sgdf_data0430)
 summary(fitMarginTotal)
 # This is obvious and extremely predictive. Woo hoo, results. 
 
-
 # Controls
 fitQuality <- lm(Margin_Period~SentDiff_Period_Lag1 + QualityDiff,data=sgdf_data0430)
 summary(fitQuality)
@@ -93,50 +111,63 @@ summary(fitTwitter)
 nmins <- 40
 firstHalfData <- sgdf_data0430[sgdf_data0430$Min_End < 3*nmins/2, ]
 
-# Standard model
-resids = rep(NA, 40)
-for (i in 5:40){
+library(ggplot2)
+# Both models on all time periods
+glm.Standard = glm(Winner ~ Vegas_Line + Margin_TOT, family=binomial(logit), data=sgdf_data0430)
+glm.Sentiment = glm(Winner~Vegas_Line + Margin_TOT + SentDiff_Total, family=binomial(logit), data=sgdf_data0430)
+glm.Volume =  glm(Winner~Vegas_Line + Margin_TOT + VolDiff_Total, family=binomial(logit), data=sgdf_data0430)
+glm.VolumeSentiment =  glm(Winner~Vegas_Line + Margin_TOT + VolDiff_Total + SentDiff_Total, family=binomial(logit), data=sgdf_data0430)
+
+# Logistic Regression: Standard model, vegas line and total margin
+resids = rep(NA, 39)
+for (i in 5:39){
   subst = sgdf_data0430[sgdf_data0430$Min_End == i, ]
   glm.out = glm(Winner ~ Vegas_Line + Margin_TOT, family=binomial(logit), data=subst)
   coef(summary(glm.out))
   resids[i] = mean(resid(glm.out))
-  ps[i] <- p 
 }
-plot(1:length(resids), resids)
-
-# vegas line, total margin, sent difference
-residSent = rep(NA, 40)
-for (i in 5:40){
+# Logistic Regression: Standard Model with Sentiment Difference Total
+residSent = rep(NA, 39)
+ps = rep(NA, 39)
+for (i in 5:39){
   subst = sgdf_data0430[sgdf_data0430$Min_End == i, ]
   glm.out = glm(Winner ~ Vegas_Line + Margin_TOT + SentDiff_Total, family=binomial(logit), data=subst)
-  coef(summary(glm.out))
+  ps[i] = coef(summary(glm.out))[3,4]
   residSent[i] = mean(resid(glm.out))
-  ps[i] <- p 
 }
-points(1:length(residSent), residSent, pch=2)
+# plot(1:length(resids), resids)
+# points(1:length(residSent), residSent, pch=2)
+# plot(1:length(ps), ps, col='red' )
+# lines(1:length(ps), ps)
+# abline(coef=c(0.05,0), col='blue',lty=2)
+which(ps < 0.05)
+write.csv(ps, 'pvaluesSentDiffSignifance.csv')
 
-plot(residSent - resids, type='l')
+df = data.frame(SentResid = residSent, StandardResid = resids)
+write.csv(df, 'Residuals.csv',row.names=FALSE)
 
-library(ggplot2)
-# Logistic Regressions of Winner
-ps = rep(NA, 40)
-for (i in 5:40){
-  subst = sgdf_data0430[sgdf_data0430$Min_End < i, ]
-  glm.out = glm(Winner ~ TwitterDiff + QualityDiff + SentDiff_Period + Margin_TOT, family=binomial(logit), data=subst)
-  coef(summary(glm.out))
-  p = coef(summary(glm.out))[4,4]
-  ps[i] <- p 
+## Testing Volume Model against Standard
+# Logistic Regression: Standard Model with Sentiment Difference Total
+residVolume = rep(NA, 39)
+for (i in 5:39){
+  subst = sgdf_data0430[sgdf_data0430$Min_End == i, ]
+  glm.out = glm(Winner ~ Vegas_Line + Margin_TOT + VolDiff_Total, family=binomial(logit), data=subst)
+  residVolume[i] = mean(resid(glm.out))
 }
-plot(1:length(ps), ps)
+df = data.frame(standards=resids, volume=residVolume, sent=residSent)
+write.csv(df, 'VolumeSentResiduals.csv')
 
-ps = rep(NA, 40)
-for (i in 5:40){
-  subst = sgdf_data0430[sgdf_data0430$Min_End < i, ]
-  glm.out = glm(Winner ~ TwitterDiff + QualityDiff + SentDiff_Period + Margin_TOT, family=binomial(logit), data=subst)
-  coef(summary(glm.out))
-  p = coef(summary(glm.out))[4,4]
-  ps[i] <- p 
+
+residCombined = rep(NA, 39)
+ps = rep(NA, 39)
+for (i in 5:39){
+  subst = sgdf_data0430[sgdf_data0430$Min_End == i, ]
+  glm.out = glm(Winner ~ Vegas_Line + Margin_TOT + VolDiff_Total + SentDiff_Total, family=binomial(logit), data=subst)
+  residCombined[i] = mean(resid(glm.out))
 }
+df = data.frame(standards=resids, volume=residVolume, sent=residSent, combined=residCombined)
+write.csv(df, 'CombinedResiduals.csv')
+
 
 # Question 3
 # Does Twitter volume result to big events (which we'll call magnitude of margin)
@@ -150,7 +181,7 @@ summary(fitBigEvent)
 # still kind of, which is a good sign! 
 
 # What about total margin? 
-fitBigEventTotal <- lm(Vol_Total~abs(Margin_TOT), data=sgdf_data0430)
+fitBigEventTotal <- lm(Vol_Total~abs(Margin_TOT_Lag1), data=sgdf_data0430)
 summary(fitBigEventTotal)
 
 # Interactions with team twitter statistics? 
@@ -161,8 +192,13 @@ summary(fitBigEventTotalTwitter)
 fitVolMarginLabs <- lm(Vol_Total~abs(Margin_Period) + abs(Margin_Period_Lag1) + abs(Margin_Period_Lag2), data=sgdf_data0430)
 summary(fitVolMarginLabs)
 
+# Sentiment Analysis Reactions
+fitSentReact <- lm(SentDiff_Period ~ Margin_Period_Lag1, data=sgdf_data0430)
+summary(fitSentReact)
 
-
+# Sentiment Analysis Reaction, control for Tweet Volume in the same period
+fitSentReact <- lm(SentDiff_Period ~ Margin_Period_Lag1 + Vol_Period, data=sgdf_data0430)
+summary(fitSentReact)
 
 
 
