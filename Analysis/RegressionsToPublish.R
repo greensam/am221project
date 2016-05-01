@@ -9,9 +9,9 @@ sgdf_data0430 = read.csv("tweetdata.csv", header=TRUE)
 
 ##################################################
 ##################################################
-###########	    					 	##########
+###########	    					 	          ##########
 ###########	    REGRESSION FAMILY 1 	##########
-###########	    					 	##########
+###########	    					 	          ##########
 ##################################################
 ##################################################
 
@@ -84,9 +84,9 @@ fitVolMarginLagControlsSubset <- lm(VolDiff_Period ~ Margin_Period_Lag1+  Vegas_
 
 ##################################################
 ##################################################
-###########	    					 	##########
+###########	    					  	        ##########
 ###########	    REGRESSION FAMILY 2 	##########
-###########	    					 	##########
+###########	    					 	          ##########
 ##################################################
 ##################################################
 
@@ -137,8 +137,6 @@ fitMarginVolSentControls <- lm(Margin_Period_Lag1 ~ VolDiff_Period_Lag1 + SentDi
 # Margin_T ~ Volume_T-1 + Volume_T-2 + Volume_T-3 + Controls
 fitMarginVolMultipleControls <- lm(Margin_Period_Lag1 ~ VolDiff_Period_Lag1 + VolDiff_Period_Lag2 + VolDiff_Period_Lag3 +  Vegas_Line + QualityDiff + TwitterDiff + Min_End, data=sgdf_data0430)
 
-
-
 ##################################################
 ##################################################
 # Table 6 Regressions
@@ -169,9 +167,9 @@ fitMarginVolTot <- lm(Margin_Period~SentDiff_Total_Lag1+ VolDiff_Total_Lag1 +  V
 
 ##################################################
 ##################################################
-###########	    					 	##########
+###########	    					 	          ##########
 ###########	    REGRESSION FAMILY 3 	##########
-###########	    					 	##########
+###########	    					 	          ##########
 ##################################################
 ##################################################
 
@@ -200,7 +198,7 @@ glm.Volume =  glm(Winner~Vegas_Line + Margin_TOT + VolDiff_Total, family=binomia
 glm.VolumeSentiment =  glm(Winner~Vegas_Line + Margin_TOT + VolDiff_Total + SentDiff_Total, family=binomial(logit), data=sgdf_data0430)
 
 ###################################################
-			# End Regression Family 2 # 
+			# End Regression Family 3 # 
 ###################################################
 
 
