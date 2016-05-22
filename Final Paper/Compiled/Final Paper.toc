@@ -3,11 +3,11 @@
 \contentsline {section}{\numberline {3}Data Overview}{7}{section.3}
 \contentsline {subsection}{\numberline {3.1}Game Data}{7}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Twitter Data}{9}{subsection.3.2}
-\contentsline {section}{\numberline {4}Empirical Results}{15}{section.4}
-\contentsline {subsection}{\numberline {4.1}Twitter's Ability to Process Prior Events}{15}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Twitter's Ability To Predict Near-Term Events}{17}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Twitter's Ability To Predict Game-End Winners}{19}{subsection.4.3}
-\contentsline {section}{\numberline {5}Discussion}{22}{section.5}
-\contentsline {section}{\numberline {6}Tables and Figures}{26}{section.6}
-\contentsline {section}{\numberline {7}Bibliography}{33}{section.7}
-\contentsline {section}{\numberline {8}Appendices}{36}{section.8}
+\contentsline {section}{\numberline {4}Empirical Results}{14}{section.4}
+\contentsline {subsection}{\numberline {4.1}Twitter's Ability to Process Prior Events}{14}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Twitter's Ability To Predict Near-Term Events}{16}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Twitter's Ability To Predict Game-End Winners}{18}{subsection.4.3}
+\contentsline {section}{\numberline {5}Discussion}{21}{section.5}
+\contentsline {section}{\numberline {6}Tables and Figures}{25}{section.6}
+\contentsline {section}{\numberline {7}Bibliography}{32}{section.7}
+\contentsline {section}{\numberline {8}Appendices}{35}{section.8}
