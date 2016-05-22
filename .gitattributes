@@ -1,3 +1,0 @@
-firstround/*.json filter=lfs diff=lfs merge=lfs -text
-converted/*.csv filter=lfs diff=lfs merge=lfs -text
-separated/*.csv filter=lfs diff=lfs merge=lfs -text
